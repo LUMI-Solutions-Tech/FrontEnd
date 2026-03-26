@@ -47,6 +47,10 @@ body {
     color: #000;
 }
 
+.opcoes-menu:hover {
+    color: #009236;
+}
+
 .login {
     background-color: #009236;
     color: #fff;
@@ -55,11 +59,22 @@ body {
     width: 10%;
 }
 
+.login:hover {
+    background-color: beige;
+    color: #009236;
+    border: 2px solid #009236;
+}
+
 .cadastro {
     color: #009236;
     border: 2px solid #009236;
     border-radius: 8px;
     padding: 8px 16px;
+}
+
+.cadastro:hover {
+    background-color: #009236;
+    color: #fff;
 }
 
 .container {
