@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Lumi Solutions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header id="home">
+        <div class="cabecalho-cadastro">
+             <div class="logo-container">
+                <img src="imagens/logo-bg.png" alt="Logo Lumi Solutions" class="img-logo">
+                <p class="nome-logo">Lumi Solutions Tech</p>
+             </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="container-cadastro">
+            <div class="inputsCadastro">
+                <h2 class="title-cadastro">Cadastro</h2>
+                <p class="text-cadastro">Faça o cadastro na Lumi</p>
+
+                <p class="text-input">Nome completo:</p> <br>
+                <input type="text" id="ipt_nomeCompleto" class="ipt_cadastro">
+                <br><br>
+                <p class="text-input">Email:</p> <br>
+                <input type="text" id="ipt_email" class="ipt_cadastro">
+                <br><br>
+                <p class="text-input">Senha:</p> <br>
+                <input type="password" id="iptSenha" class="ipt_cadastro">
+                <br><br>
+                <p class="text-input">Confirme a sua senha:</p> <br>
+                <input type="password" id="ipt_ConfSenha" class="ipt_cadastro">
+                <br><br>
+
+                <button onclick="cadastrar()" class="btn-cadastro">Cadastre-se</button>
+                <br><br>
+                <p class="msgCadastro">Já tem uma conta? <a class="msgLoginLink" href=""><span>Faça login</span></a></p>
+            </div>
+
+                <img src="imagens/imagem-login.png" alt="Desenho de uma mão segurando um celular que está verificando uma senha." class="img-cadastro">
+        </div>
+        
+    </section>
+    
+</body>
+</html>
