@@ -182,3 +182,86 @@ span {
 .img-cadastro {
     width: 28%;
 }
+
+/* parte4EscolhaMelhor-Mickaela */
+
+.tituloParte4 {
+    height: 20dvh;
+    color: #023F3A;
+    font-size: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.conteineImagensParte4 {
+    height: 60dvh;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteineImagensParte4 img {
+    display: flex;
+    height: 90%;
+    width: 90%;
+}
+
+.itemPrimeiraImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('imagensParte4/imagem1Tecnologia.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+
+}
+
+
+.itemSegundaImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('imagensParte4/imagem2ProducaoSustentavel.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+
+}
+
+
+.itemTerceiraImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('imagensParte4/image3AltaProdutividade.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+}
+
+.textoparte4 {
+    color: #ffffff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.064));
+    border-radius: 5%;
+    width: 87%;
+    height: 89%;
+    gap: 3px;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+
+}
+
+.tituloparte4{
+
+    margin: 0;
+    font-size: 20px;
+}
+
+.paragrafoParte4{
+    margin: 0;
+    font-size: 12px;
+}
