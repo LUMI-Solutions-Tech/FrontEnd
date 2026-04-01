@@ -233,6 +233,69 @@ span {
 }
 
 
+
+/*parte3NossaMissao-Matheus*/
+
+.containerNossaMissao{
+
+    margin: 0 auto;
+
+
+}
+
+.missaoPai{
+
+    display: flex;
+     justify-content: center;
+     flex-direction: row;
+    width: 60%;
+   gap: 50px;
+}
+
+.tituloMissao{
+
+font-size: 48px;
+
+
+
+}
+
+
+.textoMissao{
+
+    margin-bottom: 25px;
+    font-size: 18px;
+
+}
+
+.divIcones{
+
+display: flex;
+flex-direction: row;
+gap: 10px;
+
+}
+
+.icones{
+
+width: 9%;
+
+
+
+
+}
+
+
+.textoIcone{
+
+
+
+
+
+}
+
+
+
 /* parte4EscolhaMelhor-Mickaela */
 
 .tituloParte4 {
@@ -315,3 +378,4 @@ span {
     margin: 0;
     font-size: 12px;
 }
+
