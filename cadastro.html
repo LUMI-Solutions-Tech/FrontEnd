@@ -8,7 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="estilosCss/styles.css">
+    <link rel="stylesheet" href="estilosCss/loginCadastro.css">
 </head>
 <body>
     <header id="home">
@@ -22,29 +23,58 @@
 
     <section>
         <div class="container-cadastro">
+            <img src="imagens/img-cadastro.svg" alt="Desenho de uma mão segurando um celular que está verificando uma senha." class="img-cadastro">
+
             <div class="inputsCadastro">
+                <div class="topo-login">
+                    <p class="boasvindas-text">Bem vindo ao <strong>LUMI</strong></p>
+
+                    <div class="toggle-botoes">
+                        <button class="btn-toggle toggle-link"><a href="login.html">Login</a></button>
+                        <button class="btn-toggle active toggle-link"><a href="cadastro.html">Cadastrar</a></button>
+                    </div>
+                </div>
+
                 <h2 class="title-cadastro">Cadastro</h2>
-                <p class="text-cadastro">Faça o cadastro na Lumi</p>
+                <p class="text-cadastro">Vamos deixar tudo pronto para que você possa acessar sua conta pessoal.</p>
 
-                <p class="text-input">Nome completo:</p> <br>
-                <input type="text" id="ipt_nomeCompleto" class="ipt_cadastro">
-                <br><br>
-                <p class="text-input">Email:</p> <br>
-                <input type="text" id="ipt_email" class="ipt_cadastro">
-                <br><br>
-                <p class="text-input">Senha:</p> <br>
-                <input type="password" id="iptSenha" class="ipt_cadastro">
-                <br><br>
-                <p class="text-input">Confirme a sua senha:</p> <br>
-                <input type="password" id="ipt_ConfSenha" class="ipt_cadastro">
-                <br><br>
+                <div class="cadastro-nome">
+                    <div class="grupo-input">
+                        <input type="text" id="ipt_primeiroNome" class="ipt_cadastro" placeholder="">
+                        <label>Primeiro nome</label>
+                    </div>
+                    <div class="grupo-input">
+                        <input type="text" id="ipt_ultimoNome" class="ipt_cadastro" placeholder="">
+                        <label>Último nome</label>
+                    </div>
+                </div>
 
-                <button onclick="cadastrar()" class="btn-cadastro">Cadastre-se</button>
+                <div class="cadastro-email">
+                    <div class="grupo-input">
+                        <input type="text" id="ipt_email" class="ipt_cadastro" placeholder="">
+                        <label>Email</label>
+                    </div>
+                    <div class="grupo-input">
+                        <input type="text" id="ipt_email" class="ipt_cadastro" placeholder="">
+                        <label>Confirme o seu email</label>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <input type="password" id="iptSenha" class="ipt_cadastroSenha" placeholder="">
+                    <label>Senha</label>
+                </div>
+
+                <div class="grupo-input">
+                    <input type="password" id="ipt_ConfSenha" class="ipt_cadastroSenha" placeholder="">
+                    <label>Confirme a sua senha</label>
+                </div>
+                
+                <button onclick="cadastrar()" class="btn-cadastro">Crie sua conta</button>
                 <br><br>
                 <p class="msgCadastro">Já tem uma conta? <a class="msgLoginLink" href=""><span>Faça login</span></a></p>
             </div>
 
-                <img src="imagens/imagem-login.png" alt="Desenho de uma mão segurando um celular que está verificando uma senha." class="img-cadastro">
         </div>
         
     </section>
