@@ -55,25 +55,29 @@
                         <label>Email</label>
                     </div>
                     <div class="grupo-input">
-                        <input type="text" id="ipt_email" class="ipt_cadastro" placeholder="">
+                        <input type="text" id="ipt_confEmail" class="ipt_cadastro" placeholder="">
                         <label>Confirme o seu email</label>
                     </div>
                 </div>
 
                 <div class="grupo-input">
-                    <input type="password" id="iptSenha" class="ipt_cadastroSenha" placeholder="">
+                    <input type="password" id="ipt_senha" class="ipt_cadastroSenha" placeholder="" oninput="validarSenha()">
                     <label>Senha</label>
                 </div>
 
+                <div id="msgSenha"></div>
+
                 <div class="grupo-input">
-                    <input type="password" id="ipt_ConfSenha" class="ipt_cadastroSenha" placeholder="">
+                    <input type="password" id="ipt_confSenha" class="ipt_cadastroSenha" placeholder="">
                     <label>Confirme a sua senha</label>
                 </div>
                 
                 <button onclick="cadastrar()" class="btn-cadastro">Crie sua conta</button>
                 <br><br>
                 <p class="msgCadastro">Já tem uma conta? <a class="msgLoginLink" href=""><span>Faça login</span></a></p>
+                <div id="msgSucessoNoCadastro"></div>
             </div>
+
 
         </div>
         
@@ -81,3 +85,74 @@
     
 </body>
 </html>
+<script>
+    function cadastrar() {
+        let primeiroNome = ipt_primeiroNome.value.trim();
+        let ultimoNome = ipt_ultimoNome.value.trim();
+        let email = ipt_email.value.trim();
+        let confEmail = ipt_confEmail.value.trim();
+        let senha = ipt_senha.value.trim();
+        let confSenha = ipt_confSenha.value.trim();
+        let erros = '';
+
+        if (primeiroNome.length < 3) {
+            erros += `Informe o seu nome / `;
+        }
+
+        if (ultimoNome.length == 0) {
+            erros += `Informe o seu sobrenome / `;
+        }
+
+        if (email.length == 0 || email.length < 6) {
+            erros += `Informe o seu e-mail / `;
+        } else if (!email.includes('@') || !email.includes('.com')) {
+            erros += `Insira um e-mail válido! / `;
+        }
+        
+        if (email.length > 0) {
+            if (confEmail.length == 0 || confEmail.length < 6) {
+                erros += `Confirme o seu e-mail / `;
+            } else if (confEmail != email) {
+                erros += `O e-mail de confirmação não coincide, revise esse campo / `;
+            } 
+        } 
+
+        if (senha.length == 0) {
+            erros += `Escolha sua senha / `;
+        } 
+        
+        if (senha.length > 0) {
+            if (confSenha.length == 0) {
+                erros += `Confirme sua senha / `;
+            } else if (confSenha != senha) {
+            erros += `A confirmação de senha está diferente! / `;
+            }
+        }
+
+        if (erros == '') {
+            if (email == confEmail && senha == confSenha) {
+                msgSucessoNoCadastro.innerHTML = `<p class="msg-sucesso-cadastro"><span>Você foi cadastrado com sucesso!<br>Em breve te enviaremos um e-mail sobre os próximos passos!</span></p>`
+            }
+        } else {
+            alert(erros);
+        }
+    }
+
+    function validarSenha() {
+        let senha = ipt_senha.value;
+
+        if (senha == '') {
+            msgSenha.innerHTML = '';
+            return;
+        }
+
+        if (senha.length < 7) {
+            msgSenha.innerHTML = 'Senha fraca (mínimo 6 caracteres)';
+        } else if (senha.length >= 6 && senha.length < 10) {
+            msgSenha.innerHTML = 'Senha média';
+        } else {
+            msgSenha.innerHTML = 'Senha forte ✅';
+        }
+    }
+
+</script>
