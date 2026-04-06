@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style-dashboard.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="div-mae">
+        <div class="titulo">
+            <h3>Dashboard - Visão Geral</h3>
+            <p>Estufa A1 · Verde Vida Ltda · Sensor LED Full Spectrum</p>
+        </div>
+        <div class="card-central-acao">
+            <h4>Central de Ação</h4>
+            <p>Luminosidade abaixo do nível crítico para fotossíntese — considere ligar as lâmpadas de suplementação.
+            </p>
+        </div>
+        <div class="container-cards">
+            <div class="card-media">
+                <h5>Média da última hora</h5>
+                <h3>450 lux</h3>
+                <p>Ideal: 500-700 lux</p>
+            </div>
+            <div class="card-acumulado">
+                <h5>DLI Acumulado Hoje</h5>
+                <p>12.5 mol/m²/d</p>
+                <p>Fotossíntese ativa</p>
+            </div>
+            <div class="card-media-semanal">
+                <h5>Média Semanal</h5>
+                <p>16.4 mol/m²/d</p>
+                <p>Meta: Maior ou igual a 15 mol/m²/dia</p>
+            </div>
+            <div class="card-eficiencia">
+                <h5>Eficiência do Sistema</h5>
+                <p>82%</p>
+                <p>Rendimento LED</p>
+            </div>
+        </div>
+        <div class="container-cards2">
+
+            <div class="card-status">
+                <h5>Status da Luz Natural</h5>
+                <p>BOA</p>
+            </div>
+            <div class="card-acao">
+                <h5>Ação do Sistema</h5>
+                <p>Ligando</p>
+            </div>
+        </div>
+        <div class="card-dash-dli">
+            <h5>DLI por dia - últimos 7 dias</h5>
+            <canvas id="chart_dli"></canvas>
+        </div>
+        <div class="card-metadiaria">
+            <h4>Meta diária</h4>
+        </div>
+        <div class="card-dash-ppfd">
+            <h4>Histórico de Luminosidade - Últimas 24 Horas</h4>
+            <canvas id="hist_lux_chart"></canvas>
+        </div>
+        <div class="container-cards3">
+            <div class="card-resumo">
+                <h4>Resumo da Semana</h4>
+                <p>Melhor dia: quarta-feira - 19.2 mol/m²/d</p>
+                <p>Pior dia: domingo - 12.8 mol/m²/d</p>
+                <p>Meta: 15 mol/m²/d</p>
+            </div>
+            <div class="card-comparacao">
+                <h4>Comparação - Com LED x Sem LED</h4>
+                <p>Com LED: xxxxxxxxxx</p>
+                <p>Sem LED: xxxxxxxxxx</p>
+            </div>
+        </div>
+        <div class="container-cards4">
+            <div class="card-metas">
+                <h4>Dias na Meta</h4>
+                <p>5/7 dias na semana</p>
+            </div>
+
+            <div class="card-produtividade">
+                <h4>Produtividade</h4>
+                <p>80%</p>
+                <p>Faltam 2 horas de luz natural para alcançar a meta de crescimento</p>
+            </div>
+            <div class="card-infos-estufa">
+                <h5>Estufa A1 - Verde Vida LTDA</h5>
+                <p>Cultura: Alface Americana</p>
+                <p>Insfraestrutura: LED Full Spectrum</p>
+                <p>Sensor: Ativo</p>
+                <p>PPFD Ideal: 200 μmol/m²/s</p>
+                <p>DLI Ideal: 17 mol/m²/d</p>
+            </div>
+        </div>
+
+        <div class="card-dli-mensal">
+            <h3>DLI Mensal - Jan a Mar</h3>
+            <p>INSERIR DADOS</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+<script>
+    let label_dli = [
+        'Seg',
+        'Ter',
+        'Qua',
+        'Qui',
+        'Sex',
+        'Sáb',
+        'Dom'
+    ];
+
+    let data_dli = {
+        labels: label_dli,
+        datasets: [
+            {
+                label: 'DLI',
+                backgroundColor: '#008000',
+                borderColor: '#008000',
+                data: [16.8, 17.2, 17.5, 17.0, 11.3, 11.5, 11.8],
+            }]
+    };
+
+    let config_dli = {
+        type: 'bar',
+        data: data_dli,
+        options: {}
+    };
+
+    let label_hist_lux = [
+        '00:00',
+        '01:00',
+        '02:00',
+        '03:00',
+        '04:00',
+        '05:00',
+        '06:00',
+        '07:00',
+        '08:00',
+        '09:00',
+        '10:00',
+        '11:00',
+        '12:00',
+        '13:00',
+        '14:00',
+        '15:00',
+        '16:00',
+        '17:00',
+        '18:00',
+        '19:00',
+        '20:00',
+        '21:00',
+        '22:00',
+        '23:00',
+    ];
+
+    let data_hist_lux = {
+        labels: label_hist_lux,
+        datasets: [
+            {
+                label: 'PPFD',
+                backgroundColor: '#FA8016',
+                borderColor: '#FA8016',
+                data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 159.13, 270.43, 416.66, 452.43, 522.85, 549.02, 544.85, 465.64, 401.51, 270.27, 145.67, 3.41, 0.33, 4.74, 4.83, 4.04, 1.52]
+            }]
+    };
+
+    let config_hist_lux = {
+        type: 'line',
+        data: data_hist_lux,
+        options: {}
+    };
+</script>
+<script>
+    let chart_dli = new Chart(
+        document.getElementById('chart_dli'),
+        config_dli
+    );
+
+    let chart_hist_lux = new Chart(
+        document.getElementById('hist_lux_chart'),
+        config_hist_lux
+    );
+</script>

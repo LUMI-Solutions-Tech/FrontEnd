@@ -1,0 +1,251 @@
+.div-mae{
+    padding: 0%;
+    margin: 0%;
+    height: 150%;
+    background-color: #F5F7F3;
+}
+.titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+    font-size: 36px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.titulo p{
+    font-size: 18px;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-central-acao{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #FCF5EB;
+    color: #FA8016;
+    border-radius: 3px;
+    border-color: #FA8016;
+    border-width: 1px;
+    border-style: solid;
+    width: 1450px;
+}
+.card-central-acao h4{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card-central-acao p{
+    font-size: 12px;
+    font-weight: normal;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container-cards{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+
+}
+
+.card-media{
+    background-color: #FCF5EB;
+    color: #FA8016;
+    border-radius: 3px;
+    border-color: #FCF5EB;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.card-acumulado{
+    background-color: #DFF5DE;
+    color: #57AF32;
+    border-radius: 3px;
+    border-color: #DFF5DE;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.card-media-semanal{
+    background-color: #EDFAED;
+    color: #11682A;
+    border-radius: 3px;
+    border-color: #EDFAED;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.card-eficiencia{
+    background-color: #E5F7E8;
+    color: #0C441D;
+    border-radius: 3px;
+    border-color: #E5F7E8;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.container-cards2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.card-status{
+    background-color: #FFFFFF;
+    color: #57AF32;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 700px;
+}
+.card-acao{
+    background-color: #FFFFFF;
+    color: #FA8016;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 700px;
+}
+
+.card-dash-dli{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative; 
+    height: 375px; 
+    width: 1475px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+.card-dash-dli h5{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card-metadiaria{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 1450px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.card-dash-ppfd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative; 
+    height: 375px; 
+    width: 1475px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.container-cards3{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.card-resumo{
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 700px;
+}
+.card-comparacao{
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 700px;
+}
+
+.container-cards4{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.card-metas{
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.card-produtividade{
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 260px;
+}
+
+.card-infos-estufa{
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 3px;
+    border-color: #FFFFFF;
+    border-width: 1px;
+    border-style: solid;
+    width: 700px;
+}
+
+.card-dli-mensal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative; 
+    height: 375px; 
+    width: 1475px;
+    background-color: #fff;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
