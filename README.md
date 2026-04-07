@@ -104,6 +104,7 @@ A interface do Lumi está sendo desenvolvida com uma estética **moderna, tecnol
 - **HTML5**
 - **CSS3**
 - **JavaScript**
+- **Chart.js**
 
 ### Hardware / Protótipo
 - **Arduino UNO R3**
