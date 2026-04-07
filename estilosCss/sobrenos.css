@@ -1,0 +1,94 @@
+/* Sobre nós - Mickaela*/
+
+.tituloImpactos {
+    height: 20dvh;
+    color: #023F3A;
+    font-size: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.conteineImagensImpactosProjeto {
+    height: 60dvh;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.conteineImagensImpactosProjeto img {
+    display: flex;
+    height: 90%;
+    width: 90%;
+
+}
+
+.itemPrimeiraImagemImpactos {
+    height: 80%;
+    width: 25%;
+    background-image: url('/imagens/imagemMonitoramentointeligente.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+.itemSegundaImagemImpactos {
+    height: 80%;
+    width: 25%;
+    background-image: url('/imagens/imagemQualidadeCultivo.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.itemTerceiraImagemImpactos {
+    height: 80%;
+    width: 25%;
+    background-image: url('/imagens/dadosimpacto.webp');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+}
+
+.textoimagemimpactos {
+    color: #ffffff;
+    border-radius: 5%;
+    width: 89%;
+    height: 12%;
+    gap: 3px;
+    margin-top: 70%;
+    margin-bottom: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.049));
+
+
+}
+
+.titulodaImagemImpactos{
+
+    margin: 0;
+    font-size: 20px;
+}
+
+.paragrafoImpactos{
+    margin: 0;
+    font-size: 12px;
+
+}
+
+/* Sobre nós - Mickaela*/
