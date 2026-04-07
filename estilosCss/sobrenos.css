@@ -1,3 +1,88 @@
+/*Sobre nós - Jonas*/
+.container-sobrenos{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 20px;
+    background-color: white;
+    gap: 100px;
+}
+
+.card-imagem-sobrenos{
+    margin-top: 250px;
+    height: auto;
+    width: 35%;
+    margin-left: 200px;
+}
+.card-imagem-sobrenos img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-titulo-sobrenos {
+    display: flex;
+    flex-direction: column;
+    margin-top: 220px;
+    max-width: 450px;
+    text-align: justify;
+}
+.card-titulo-sobrenos h4{
+    font-size: 32px;
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+    color: black;
+}
+.card-titulo-sobrenos p{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    line-height: 1.6;
+}
+
+
+.container-sobrenos-2{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 20px;
+    background-color: white;
+    gap: 150px;
+}
+
+.card-imagem-sobrenos-2{
+    margin-top: 100px;
+    height: auto;
+    width: 35%;
+    margin-right: 200px;
+}
+.card-imagem-sobrenos-2 img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card-titulo-sobrenos-2 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    max-width: 460px;
+    text-align: left;
+}
+.card-titulo-sobrenos-2 h4{
+    font-size: 32px;
+    font-weight: bold;
+    font-family:Arial, Helvetica, sans-serif;
+    color: black;
+}
+.card-titulo-sobrenos-2 p{
+    display: flex;
+    flex-direction: column;
+    color: black;
+    line-height: 1.6;
+}
+/*FIM -sobre nós - Jonas*/
+
 /* Sobre nós - Mickaela*/
 
 .tituloImpactos {
