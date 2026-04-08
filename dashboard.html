@@ -47,7 +47,7 @@
         <div class="grid-4">
             <div class="card laranja">
                 <small>Média da Última Hora</small><b>450 <span>lux</span></b><small>Ideal:
-                    500–700 lux</small>
+                    500-700 lux</small>
             </div>
             <div class="card verde-claro"><small>DLI Acumulado Hoje</small><b>12.5
                     <span>mol/m²/d</span></b><small>Fotossíntese ativa</small></div>
@@ -243,19 +243,19 @@
             data: {
                 labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
                 datasets: [{
-                    label: 'Lux', data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 159.13, 270.43, 416.66, 452.43, 522.85, 549.02, 544.85, 465.64, 401.51, 270.27, 145.67, 3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
+                    label: 'PPFD', data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 79.13, 123.43, 181.66, 252.43, 300.85, 390.02, 368.85, 300.64, 280.51, 163.27, 92.67, 3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
                     borderColor: '#FA8016', backgroundColor: 'rgba(250,128,22,0.08)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2.5
                 }]
             },
-            options: { plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 1000 }, x: { grid: { display: false }, ticks: { maxRotation: 0 } } } },
+            options: { plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 700 }, x: { grid: { display: false }, ticks: { maxRotation: 0 } } } },
             plugins: [{
                 id: 'zona', beforeDraw(c) {
                     const { ctx, scales: { y, x } } = c;
-                    const y1 = y.getPixelForValue(700), y2 = y.getPixelForValue(500);
+                    const y1 = y.getPixelForValue(400), y2 = y.getPixelForValue(200);
                     ctx.save(); ctx.fillStyle = 'rgba(87,175,50,0.12)';
                     ctx.fillRect(x.left, y1, x.right - x.left, y2 - y1);
                     ctx.setLineDash([]); ctx.fillStyle = '#57AF32'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
-                    ctx.fillText('ZONA IDEAL (500–700 LUX)', (x.left + x.right) / 2, (y1 + y2) / 2 + 4); ctx.restore();
+                    ctx.fillText('ZONA IDEAL (200-400 PPFD)', (x.left + x.right) / 2, (y1 + y2) / 2 + 4); ctx.restore();
                 }
             }]
         });
