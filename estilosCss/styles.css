@@ -85,11 +85,9 @@ body {
     justify-content: center;
     align-items: center;
     padding: 60px 0;
-    background: linear-gradient(
-        to bottom,
-        #156915 5%,
-        #fff 100%
-    );
+    background: linear-gradient(to bottom,
+            #156915 5%,
+            #fff 100%);
 }
 
 .text {
@@ -114,23 +112,23 @@ body {
 
 /* parte2-Jonas*/
 
-.fundo-parte2{
+.fundo-parte2 {
     background-color: white;
 }
 
 
-.fundo2-parte2{
+.fundo2-parte2 {
     background-color: white;
     max-width: 1200px;
     margin: auto;
     text-align: center;
 }
 
-.fundo3-parte2{
+.fundo3-parte2 {
     background-color: white;
 }
 
-.titulo-parte2{
+.titulo-parte2 {
     display: flex;
     color: #023f3a;
     font-size: 44px;
@@ -139,7 +137,7 @@ body {
     justify-content: center;
 }
 
-.conteudo-parte2{
+.conteudo-parte2 {
     color: #525560;
     font-size: 24px;
     font-family: 'Times New Roman', Times, serif;
@@ -147,7 +145,7 @@ body {
     margin: auto;
 }
 
-.botao-parte2{
+.botao-parte2 {
     display: block;
     font-size: 16px;
     font-family: Arial, sans-serif;
@@ -163,41 +161,63 @@ body {
 
 /*parte3NossaMissao - Matheus*/
 
-.containerNossaMissao{
+.containerNossaMissao {
     display: flex;
     justify-content: center;
 }
 
-.missaoPai{
+.missaoPai {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    align-items: center;
     width: 60%;
     gap: 50px;
 }
 
-.tituloMissao{
+.tituloMissao {
     font-size: 48px;
 }
 
-.textoMissao{
+.textoMissao {
     margin-bottom: 25px;
     font-size: 18px;
 }
 
-.divIcones{
+.divIcones {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.icones{
-    width: 9%;
-
+.icones {
+    width: 12%;
+  
 }
 
 
-.textoIcone{
+.textoIcone {}
+
+.iconesMissao {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.imagemMissao {
+
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.imagensPequenas {
+
+    display: flex;
+    gap: 15px;
 
 }
 
@@ -278,14 +298,13 @@ body {
 
 }
 
-.tituloparte4{
+.tituloparte4 {
 
     margin: 0;
     font-size: 20px;
 }
 
-.paragrafoParte4{
+.paragrafoParte4 {
     margin: 0;
     font-size: 12px;
 }
-
