@@ -164,6 +164,7 @@ body {
 .containerNossaMissao {
     display: flex;
     justify-content: center;
+    margin: 6% 0;
 }
 
 .missaoPai {
@@ -171,7 +172,7 @@ body {
     justify-content: center;
     flex-direction: row;
     align-items: center;
-    width: 60%;
+    width: 85%;
     gap: 50px;
 }
 
@@ -191,7 +192,7 @@ body {
 }
 
 .icones {
-    width: 12%;
+    width: 35px;
   
 }
 
@@ -202,7 +203,7 @@ body {
 
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
 }
 
 .imagemMissao {
@@ -217,7 +218,7 @@ body {
 .imagensPequenas {
 
     display: flex;
-    gap: 15px;
+    gap: 30px;
 
 }
 
