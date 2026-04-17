@@ -309,3 +309,51 @@ body {
     margin: 0;
     font-size: 12px;
 }
+
+
+/*Parte do joao */
+.rodape{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+.link-rodape{
+ display: flex;
+ gap: 50px;
+ /* flex-direction: column; */
+}
+
+.informacoes{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 30%;
+}
+
+.img-mapa{
+    width: 100%;
+}
+
+.icones-informacoes{
+    width: 45%;
+}
+
+.img-informacoes{
+    width: 15%;
+}
+.titulo-informacoes{
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.texto-informacoes{
+    font-size: 12px;
+    color: #525560;
+    margin: 0;
+}
+.direitos{
+    font-size:10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
