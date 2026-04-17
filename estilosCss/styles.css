@@ -147,7 +147,8 @@ body {
 
 .botao-parte2 {
     display: block;
-    font-size: 16px;
+    font-size: 22px;
+    font-weight: 600;
     font-family: Arial, sans-serif;
     background-color: #156915;
     color: white;
@@ -157,6 +158,9 @@ body {
     margin: auto;
     margin-top: 52px;
     margin-bottom: 100px;
+    width: 10%;
+    text-decoration: none;
+    text-align: center;
 }
 
 /*parte3NossaMissao - Matheus*/
@@ -197,7 +201,6 @@ body {
 }
 
 
-.textoIcone {}
 
 .iconesMissao {
 
@@ -288,10 +291,10 @@ body {
     color: #ffffff;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.064));
     border-radius: 5%;
-    width: 90%;
-    height: 91%;
+    width: 87%;
+    height: 89%;
     gap: 3px;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

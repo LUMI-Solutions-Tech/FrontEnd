@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/estilosCss/calculadora.css">
+    <title>Calculadora de Desperdício</title>
+</head>
+
+<body>
+
+    <div class="tituloCalculadora">
+        <h2>Calculadora de perdas por Luminosidade</h2>
+        <p>Descubra quanto sua produção de alface está perdendo sem controle de iluminação</p>
+    </div>
+
+    <div class="conteinerFundoCalculadora">
+        <div class="inputsCalculadora">
+
+
+
+            <div class="conteinerInputsCalculadora">
+                <h5>Quantidade de alface vendido ao mês</h5>
+                <input id="ipt_qtd" type="text" placeholder="Ex. 500 unidades">
+            </div>
+
+            <div class="conteinerInputsCalculadora">
+                <h5>Preço unitário do alface:</h5>
+                <input id="ipt_preço" type="text" placeholder="Ex. R$:2,50">
+            </div>
+
+        </div>
+
+        <div class="legendaCalculadora">
+            <div class="item">
+                Biomassa ideal (com iluminação controlada)
+            </div>
+
+            <div class="item">
+                Biomassa obtida (sem controle)
+            </div>
+
+            <div class="item">
+                Perda por planta
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <div id="mensagensCalculadora">
+            <div id="msgCalculadora" class="cardCalculadora"> Alfaces perdidas <br >por mês<br>
+            <b class ="valorCalculadora"> R$0,00</b>
+            <span style="font-size: 12px;">perda anual estimada</span></div>
+
+            <div id="msg2Calculadora" class="cardCalculadora">Perda financeira <br> estimada<br>
+                <b class="valorCalculadora"> R$0,00</b>
+                <span style="font-size: 12px;">sem desperdícios</span>
+            </div>
+
+            <div id="msg3Calculadora" class="cardCalculadora">
+                Recuperação <br>possível com sensor<br>
+                <b class="valorCalculadora"> R$0,00</b>
+                <span style="font-size: 12px;">com nosso sistema</span>
+            </div>
+        </div>
+
+        <div class="botaoCalculadora">
+            <button class="botaoCalculoDesperdicio" onclick="analisar() ">Calcular taxa de desperdício</button> <br><br>
+        </div>
+
+    </div>
+
+    <div class="cardSobreCalculadora">
+        <h4>💡  Com sensores de luminosidade Lumi, você recupera até 35% da biomassa perdida e aumenta sua receita mensal.</h4>
+    </div>
+
+
+</body>
+
+</html>
+<script>
+    function analisar() {
+
+
+        let qtde = Number(ipt_qtd.value)
+        let preco = Number(ipt_preço.value)
+
+        let totalMensal = preco * qtde
+        let totalAnual = totalMensal * 12
+
+        let nivelPerdaMensal = totalMensal * 0.30
+        let nivelPerdaAnual = nivelPerdaMensal * 12
+
+        let perdasReduzidas = nivelPerdaAnual * 0.70
+        let novoFaturamento = totalAnual - nivelPerdaAnual + perdasReduzidas
+
+
+
+        if (qtde <= 0) {
+            alert(`Por favor, insira uma quantidade válida maior que 0`)
+
+        } else if (preco <= 0) {
+            alert(`Por favor, insira um preço válido maior que 0`)
+        } else {
+
+            msgCalculadora.innerHTML = `
+            Alfaces perdidas <br >por mês<br>
+            <b class ="valorCalculadora"> ${nivelPerdaAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+            <span style="font-size: 12px;">perda anual estimada</span>
+            `;
+
+
+            msg2Calculadora.innerHTML = `
+            Perda financeira <br> estimada<br>
+            <b class ="valorCalculadora"> ${totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+            <span style="font-size: 12px;">sem desperdícios</span>
+            `;
+
+
+
+            msg3Calculadora.innerHTML = `
+            Recuperação <br >possível com sensor<br>
+            <b class ="valorCalculadora"> ${perdasReduzidas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
+            <span style="font-size: 12px;">com nosso sistema</span>
+            `;
+
+
+        }
+
+
+    }
+</script>
