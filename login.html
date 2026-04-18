@@ -8,19 +8,29 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="estilosCss/styles.css">
     <link rel="stylesheet" href="estilosCss/loginCadastro.css">
 </head>
 
 <body>
+    <!-- PARTE RAISSA -->
     <header id="home">
-        <div class="cabecalho-cadastro">
+        <div class="cabecalho-menu">
+            <!-- remove bg -->
             <div class="logo-container">
                 <img src="imagens/logo-bg.png" alt="Logo Lumi Solutions" class="img-logo">
                 <p class="nome-logo">Lumi Solutions Tech</p>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" target="_blank" class="opcoes-menu">Início</a>
+                <a href="calculadora.html" target="_blank" class="opcoes-menu">Calculadora</a>
+                <a href="sobre.html" target="_blank" class="opcoes-menu">Sobre nós</a>
+                <a href="#rodape" class="opcoes-menu">Contato</a>
+                <a href="login.html" target="_blank" class="opcoes-menu login">Entre</a>
+                <a href="cadastro.html" target="_blank" class="opcoes-menu cadastro">Cadastre-se</a>
             </div>
         </div>
     </header>
@@ -56,16 +66,18 @@
 
                 <button onclick="cadastrar()" class="btn-cadastro">Login</button>
                 <br><br>
-                <p class="msgCadastro">Não tem uma conta? <a class="msgLoginLink" href=""><span>Cadastre-se</span></a>
+                <p class="msgCadastro">Não tem uma conta? <a class="msgLoginLink" href="cadastro.html"><span>Cadastre-se</span></a>
                 </p>
+
+                <a href="dashboard.html" id="linkDashboard" style="display:none;">Ir para dashboard</a>
             </div>
         </div>
-
     </section>
-
+    <!-- PARTE RAISSA -->
 </body>
 
 </html>
+<!-- PARTE MICKAELA -->
 <script>
 
     let tentativas = 3
@@ -85,6 +97,9 @@
         else if (email == `admin@gmail.com` && senha == `Lumi123`) {
 
             alert(`Login efetuado com sucesso!`)
+            // PARTE RAISSA
+            linkDashboard.click();
+            // PARTE RAISSA
 
         } else {
 
@@ -97,13 +112,8 @@
 
                 alert(`Usuário bloqueado!`)
             }
-
-
         }
-
-
-
-
     }
 
 </script>
+<!-- PARTE MICKAELA -->

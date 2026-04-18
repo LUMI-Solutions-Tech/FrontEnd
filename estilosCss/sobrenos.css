@@ -94,7 +94,6 @@
     flex-direction: row;
     align-items: flex-end;
     justify-content: center;
-
 }
 
 .conteineImagensImpactosProjeto {
@@ -104,14 +103,12 @@
     gap: 25px;
     align-items: center;
     justify-content: center;
-
 }
 
 .conteineImagensImpactosProjeto img {
     display: flex;
     height: 90%;
     width: 90%;
-
 }
 
 .itemPrimeiraImagemImpactos {
@@ -122,7 +119,6 @@
     border-radius: 5%;
     background-size: cover;
     background-position: center;
-
 }
 
 
@@ -160,12 +156,9 @@
     justify-content: flex-end;
     padding: 20px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.049));
-
-
 }
 
 .titulodaImagemImpactos{
-
     margin: 0;
     font-size: 20px;
 }
@@ -173,7 +166,6 @@
 .paragrafoImpactos{
     margin: 0;
     font-size: 12px;
-
 }
 
 /* Sobre nós - Mickaela*/
