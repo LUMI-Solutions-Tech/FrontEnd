@@ -7,17 +7,26 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilosCss/styles.css">
     <link rel="stylesheet" href="estilosCss/loginCadastro.css">
 </head>
 <body>
-    <header id="home">
-        <div class="cabecalho-cadastro">
-             <div class="logo-container">
+        <header id="home">
+        <div class="cabecalho-menu">
+            <div class="logo-container">
                 <img src="imagens/logo-bg.png" alt="Logo Lumi Solutions" class="img-logo">
                 <p class="nome-logo">Lumi Solutions Tech</p>
-             </div>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" class="opcoes-menu">Início</a>
+                <a href="calculadora.html" target="_blank" class="opcoes-menu">Calculadora</a>
+                <a href="sobre.html" target="_blank" class="opcoes-menu">Sobre nós</a>
+                <a href="#rodape" class="opcoes-menu">Contato</a>
+                <a href="login.html" target="_blank" class="opcoes-menu login">Entre</a>
+                <a href="cadastro.html" target="_blank" class="opcoes-menu cadastro">Cadastre-se</a>
+            </div>
         </div>
     </header>
 
@@ -74,11 +83,9 @@
                 
                 <button onclick="cadastrar()" class="btn-cadastro">Crie sua conta</button>
                 <br><br>
-                <p class="msgCadastro">Já tem uma conta? <a class="msgLoginLink" href=""><span>Faça login</span></a></p>
+                <p class="msgCadastro">Já tem uma conta? <a class="msgLoginLink" href="login.html"><span>Faça login</span></a></p>
                 <div id="msgSucessoNoCadastro"></div>
             </div>
-
-
         </div>
         
     </section>

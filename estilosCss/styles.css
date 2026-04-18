@@ -1,6 +1,6 @@
 /* PARTE RAISSA */
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
     margin: 0;
@@ -96,7 +96,7 @@ body {
 
 .title-container {
     width: 60%;
-    font-size: 350%;
+    font-size: 300%;
     margin: 0;
 }
 
@@ -197,32 +197,24 @@ body {
 
 .icones {
     width: 35px;
-  
 }
 
-
-
 .iconesMissao {
-
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
 .imagemMissao {
-
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-
 }
 
 .imagensPequenas {
-
     display: flex;
     gap: 30px;
-
 }
 
 
@@ -237,7 +229,6 @@ body {
     flex-direction: row;
     align-items: flex-end;
     justify-content: center;
-
 }
 
 .conteineImagensParte4 {
@@ -299,11 +290,9 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     padding: 20px;
-
 }
 
 .tituloparte4 {
-
     margin: 0;
     font-size: 20px;
 }
@@ -321,10 +310,23 @@ body {
     align-items: center;
 
 }
+
 .link-rodape{
- display: flex;
- gap: 50px;
- /* flex-direction: column; */
+    display: flex;
+    gap: 50px;
+    /* flex-direction: column; */
+}
+
+.opcoes-rodape {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #404145;
+}
+
+.opcoes-rodape:hover {
+    color: #013209;
+    font-weight: 600;
 }
 
 .informacoes{
