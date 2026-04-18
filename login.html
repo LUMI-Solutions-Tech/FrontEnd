@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,56 +8,102 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="estilosCss/styles.css">
     <link rel="stylesheet" href="estilosCss/loginCadastro.css">
 </head>
+
 <body>
     <header id="home">
         <div class="cabecalho-cadastro">
-             <div class="logo-container">
+            <div class="logo-container">
                 <img src="imagens/logo-bg.png" alt="Logo Lumi Solutions" class="img-logo">
                 <p class="nome-logo">Lumi Solutions Tech</p>
-             </div>
+            </div>
         </div>
     </header>
-    
+
     <section>
         <div class="container-cadastro">
-            
+
             <img src="imagens/alface-tela-login.svg" alt="Plantação de alfaces" class="img-cadastro">
             <div class="inputsCadastro">
                 <div class="topo-login">
                     <p class="boasvindas-text">Bem vindo ao <strong>LUMI</strong></p>
-                    
+
                     <div class="toggle-botoes">
                         <button class="btn-toggle active toggle-link"><a href="login.html">Login</a></button>
                         <button class="btn-toggle toggle-link"><a href="cadastro.html">Cadastrar</a></button>
                     </div>
                 </div>
-                
+
                 <h2 class="title-cadastro">Login</h2>
                 <p class="text-cadastro">Faça o login com sua conta Lumi</p>
-                
+
                 <div class="cadastro-email">
                     <div class="grupo-input">
                         <input type="text" id="ipt_email" class="ipt_cadastro" placeholder="">
                         <label>Email</label>
                     </div>
                 </div>
-                
+
                 <div class="grupo-input">
                     <input type="password" id="iptSenha" class="ipt_cadastroSenha" placeholder="">
                     <label>Senha</label>
                 </div>
-                
+
                 <button onclick="cadastrar()" class="btn-cadastro">Login</button>
                 <br><br>
-                <p class="msgCadastro">Não tem uma conta? <a class="msgLoginLink" href=""><span>Cadastre-se</span></a></p>
-            </div>    
+                <p class="msgCadastro">Não tem uma conta? <a class="msgLoginLink" href=""><span>Cadastre-se</span></a>
+                </p>
+            </div>
         </div>
-        
+
     </section>
-    
+
 </body>
+
 </html>
+<script>
+
+    let tentativas = 3
+    function cadastrar() {
+
+        let email = ipt_email.value;
+        let senha = iptSenha.value;
+
+        if (email == `` && (!email.includes('@') || !email.includes('.com'))) {
+            alert(`Por favor, insira um email válido`)
+
+        } else if (senha == ``) {
+
+            alert(`Por favor, insira uma senha válida`)
+
+        }
+        else if (email == `admin@gmail.com` && senha == `Lumi123`) {
+
+            alert(`Login efetuado com sucesso!`)
+
+        } else {
+
+            if (tentativas > 0) {
+
+                tentativas -= 1
+                alert(`Erro no login, email ou senha incorretos, restam ${tentativas} tentativas`)
+
+            } else if(tentativas <=0){
+
+                alert(`Usuário bloqueado!`)
+            }
+
+
+        }
+
+
+
+
+    }
+
+</script>

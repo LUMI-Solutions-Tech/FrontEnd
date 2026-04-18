@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(33, 29, 29);
+    background-color: #F8F7F3;
+    font-family: Arial, Helvetica, sans-serif;
+
+
+
+}
+
+.tituloCalculadora {
+    background-color: #035523;
+    color: white;
+    width: 100%;
+    height: 15dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.tituloCalculadora h2 {
+    font-size: 30px;
+}
+
+.tituloCalculadora p {
+    font-size: 14px;
+}
+
+.conteinerFundoCalculadora {
+
+    background-color: #ffffff;
+    width: 60%;
+    height: 70dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3dvh;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+
+}
+
+.inputsCalculadora {
+
+    width: 90%;
+    margin: 3dvh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.conteinerInputsCalculadora {
+    flex-direction: column;
+    margin: 13px;
+    width: 50%;
+
+}
+
+input {
+
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-self: center;
+    border-radius: 5px;
+    background-color: #F8FAF8;
+    border: 2px solid #B4D2B4;
+    padding-left: 6px ;
+}
+
+input::placeholder {
+
+    color: rgb(102, 102, 102);
+    padding-left: 10px;
+    opacity: 1;
+}
+
+.legendaCalculadora {
+    width: 85%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-top: 5px;
+    margin-bottom: 35px;
+}
+
+.item {
+    font-size: 12px;
+    border-left: red solid 5px;
+    padding: 5px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+
+}
+
+
+
+
+#mensagensCalculadora {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 23%;
+
+
+}
+
+.cardCalculadora {
+
+    width: 25%;
+    height: 120px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2dvh;
+
+}
+
+.valorCalculadora {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+#msgCalculadora {
+    background-color: #F5F0E6;
+    border-left: #C87832 10px solid;
+}
+
+#msg2Calculadora {
+    background-color: #F0F8F0;
+    border-left: #288250 10px solid;
+}
+
+#msg3Calculadora {
+    background-color: #EBF5FF;
+    border-left: #3264B4 10px solid;
+
+
+}
+
+.botaoCalculadora {
+
+    display: flex;
+
+    align-self: center;
+    margin: 20px;
+
+}
+
+.botaoCalculoDesperdicio {
+    background-color: #286432;
+    color: #FFFFFF;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px solid #035523;
+    height: 50px;
+    width: 250px;
+}
+
+.botaoCalculoDesperdicio:hover {
+    background-color: #155733;
+    transform: scale(1.05);
+    transition: 500ms;
+}
+
+.cardSobreCalculadora{
+    background-color: #02501e;
+    height: 3dvh;
+    width: 55%;
+    border-radius: 10px;
+    color: #EBF5FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    padding: 20px;
+}
