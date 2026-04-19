@@ -114,7 +114,7 @@
 .itemPrimeiraImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/imagemMonitoramentointeligente.png');
+    background-image: url('/imagens/sobre-nós/imagemMonitoramentointeligente.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -125,7 +125,7 @@
 .itemSegundaImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/imagemQualidadeCultivo.png');
+    background-image: url('/imagens/sobre-nós/imagemQualidadeCultivo.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -136,7 +136,7 @@
 .itemTerceiraImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/dadosimpacto.webp');
+    background-image: url('/imagens/sobre-nós/dadosimpacto.webp');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
