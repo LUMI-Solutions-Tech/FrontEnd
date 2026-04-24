@@ -8,7 +8,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="estilosCss/style-dashboard.css">
 </head>
 
@@ -54,8 +56,6 @@
             </div>
             <div class="card verde-claro"><small>DLI Acumulado Hoje</small><b>12.5
                     <span>mol/m²/d</span></b><small>Fotossíntese ativa</small></div>
-            <div class="card verde-medio"><small>Média Semanal</small><b>16.4 <span>mol/m²/dia</span></b><small>Meta: ≥
-                    15 mol/m²/dia</small></div>
         </div>
 
 
@@ -68,14 +68,24 @@
         </div>
 
         <div class="card branco">
-            <b>Meta Diária</b>
-            <div style="margin:10px 0 6px"><span class="badge azul">● Esperado 100%</span> <span class="badge amarelo">●
-                    Acumulado dia 52.1%</span></div>
-            <div class="barra-bg" style="background:#EBF3FF">
-                <div class="barra-fill" style="width:100%;background:#378ADD"></div>
+            <b>Resumo da Semana</b>
+            <div class="resumo-linha">
+                <div><small>Melhor dia</small>
+                    <p>Quarta-feira</p>
+                </div>
+                <div><b class="verde-txt">19.2</b> <span class="badge verde">pico</span></div>
             </div>
-            <div class="barra-bg" style="background:#FAFADA;margin-top:8px">
-                <div class="barra-fill" style="width:52%;background:#EDD011"></div>
+            <div class="resumo-linha">
+                <div><small>Pior dia</small>
+                    <p>Domingo</p>
+                </div>
+                <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
+            </div>
+            <div class="resumo-linha">
+                <div><small>Meta</small>
+                    <p>> 15 mol/m²/dia</p>
+                </div>
+                <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
             </div>
         </div>
 
@@ -87,89 +97,8 @@
             <canvas id="hist_lux_chart"></canvas>
         </div>
 
-            <div class="card branco">
-                <b>Resumo da Semana</b>
-                <div class="resumo-linha">
-                    <div><small>Melhor dia</small>
-                        <p>Quarta-feira</p>
-                    </div>
-                    <div><b class="verde-txt">19.2</b> <span class="badge verde">pico</span></div>
-                </div>
-                <div class="resumo-linha">
-                    <div><small>Pior dia</small>
-                        <p>Domingo</p>
-                    </div>
-                    <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
-                </div>
-                <div class="resumo-linha">
-                    <div><small>Meta</small>
-                        <p>> 15 mol/m²/dia</p>
-                    </div>
-                    <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
-                </div>
-            </div>
         </div>
 
-
-        <div class="card branco">
-            <b>DLI Mensal — Jan a Mar 2026</b>
-            <table>
-                <tr>
-                    <th>Sensor / Estufa</th>
-                    <th>Mês</th>
-                    <th>DLI Médio</th>
-                    <th>Dias Ideais</th>
-                    <th>Dias Abaixo</th>
-                    <th>Dias Acima</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>Estufa A1 · LED Full Spectrum</td>
-                    <td>Mar/25</td>
-                    <td>17.20</td>
-                    <td>15</td>
-                    <td>8</td>
-                    <td>8</td>
-                    <td class="verde-txt">ideal</td>
-                </tr>
-                <tr class="par">
-                    <td>Estufa A2 · HPS 600W</td>
-                    <td>Mar/25</td>
-                    <td>16.40</td>
-                    <td>8</td>
-                    <td>20</td>
-                    <td>3</td>
-                    <td class="laranja-txt">abaixo</td>
-                </tr>
-                <tr>
-                    <td>Estufa B1 · LED Full Spectrum</td>
-                    <td>Mar/25</td>
-                    <td>18.40</td>
-                    <td>15</td>
-                    <td>7</td>
-                    <td>9</td>
-                    <td class="verde-txt">ideal</td>
-                </tr>
-                <tr class="par">
-                    <td>Estufa D2 · Em manutenção</td>
-                    <td>Mar/25</td>
-                    <td>13.10</td>
-                    <td>2</td>
-                    <td>28</td>
-                    <td>1</td>
-                    <td class="vermelho-txt">crítico</td>
-                </tr>
-                <tr>
-                    <td>Estufa E1 · LED Full Spectrum</td>
-                    <td>Mar/25</td>
-                    <td>19.00</td>
-                    <td>16</td>
-                    <td>8</td>
-                    <td>7</td>
-                    <td class="verde-txt">ideal</td>
-                </tr>
-            </table>
-        </div>
 
     </main>
 
