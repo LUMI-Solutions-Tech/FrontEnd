@@ -249,7 +249,7 @@ body {
 .itemPrimeiraImagem {
     height: 80%;
     width: 20%;
-    background-image: url('../imagens/imagem1Tecnologia.png');
+    background-image: url('../imagens/home/imagem1Tecnologia.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -260,7 +260,7 @@ body {
 .itemSegundaImagem {
     height: 80%;
     width: 20%;
-    background-image: url('../imagens/imagem2ProducaoSustentavel.png');
+    background-image: url('../imagens/home/imagem2ProducaoSustentavel.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -271,7 +271,7 @@ body {
 .itemTerceiraImagem {
     height: 80%;
     width: 20%;
-    background-image: url('../imagens/image3AltaProdutividade.png');
+    background-image: url('../imagens/home/image3AltaProdutividade.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;

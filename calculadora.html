@@ -57,11 +57,11 @@
 
 
         <div id="mensagensCalculadora">
-            <div id="msgCalculadora" class="cardCalculadora"> Alfaces perdidas <br >por mês<br>
+            <div id="msgCalculadora" class="cardCalculadora"> Alfaces perdidas <br >anualmente<br>
             <b class ="valorCalculadora"> R$0,00</b>
             <span style="font-size: 12px;">perda anual estimada</span></div>
 
-            <div id="msg2Calculadora" class="cardCalculadora">Perda financeira <br> estimada<br>
+            <div id="msg2Calculadora" class="cardCalculadora">Lucro financeiro <br> estimado<br>
                 <b class="valorCalculadora"> R$0,00</b>
                 <span style="font-size: 12px;">sem desperdícios</span>
             </div>
@@ -113,14 +113,14 @@
         } else {
 
             msgCalculadora.innerHTML = `
-            Alfaces perdidas <br >por mês<br>
+            Alfaces perdidas <br >anualmente<br>
             <b class ="valorCalculadora"> ${nivelPerdaAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
             <span style="font-size: 12px;">perda anual estimada</span>
             `;
 
 
             msg2Calculadora.innerHTML = `
-            Perda financeira <br> estimada<br>
+            Lucro financeiro <br> estimado<br>
             <b class ="valorCalculadora"> ${totalAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
             <span style="font-size: 12px;">sem desperdícios</span>
             `;
