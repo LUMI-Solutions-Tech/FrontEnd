@@ -110,9 +110,9 @@
             erros += `Informe o seu sobrenome / `;
         }
 
-        if (email.length == 0 || email.length < 6) {
+        if (email.length == 0 || email.length < 10) {
             erros += `Informe o seu e-mail / `;
-        } else if (!email.includes('@') || !email.includes('.com')) {
+        } else if (!email.includes('@')) {
             erros += `Insira um e-mail válido! / `;
         }
         
