@@ -44,7 +44,7 @@
         </div>
 
         <div class="alerta">
-            <div>⚡ <b>Central de Ação</b> — Luminosidade abaixo do nível crítico para fotossíntese. Considere ligar as
+            <div> <b>Central de Ação</b> — Luminosidade abaixo do nível crítico para fotossíntese. Considere ligar as
                 lâmpadas de suplementação.</div>
             <button class="btn-laranja">⚠ AÇÃO REQUERIDA</button>
         </div>
@@ -81,8 +81,9 @@
                 </div>
                 <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
             </div>
-            <div class="resumo-linha">
-                <div><small>Meta</small>
+            <div class="resumo-linha sem-borda">
+                <div>
+                    <small>Meta</small>
                     <p>> 15 mol/m²/dia</p>
                 </div>
                 <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
@@ -103,51 +104,131 @@
     </main>
 
     <script>
+        //  DLI por Dia 
         new Chart(document.getElementById('chart_dli'), {
             type: 'bar',
             data: {
+                // Dias da semana exibidos no eixo X
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
                 datasets: [{
-                    label: 'DLI', data: [16.8, 17.2, 17.5, 17.0, 11.3, 11.8, 11.5],
+                    label: 'DLI',
+                    // Valores de DLI dia da semana
+                    data: [16.8, 17.2, 17.5, 17.0, 11.3, 11.8, 11.5],
                     backgroundColor: ['#57AF32', '#57AF32', '#57AF32', '#57AF32', '#FA8016', '#FA8016', '#FA8016'],
                     borderRadius: 6
                 }]
             },
-            options: { plugins: { legend: { display: false } }, scales: { y: { max: 20 }, x: { grid: { display: false } } } },
+            options: {
+                plugins: {
+                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+                },
+                scales: {
+                    y: { max: 20 },            // Limite máximo do eixo Y 
+                    x: { grid: { display: false } } // Remove as linhas de grade
+                }
+            },
             plugins: [{
-                id: 'meta', afterDraw(c) {
-                    const { ctx, scales: { y, x } } = c, yp = y.getPixelForValue(15);
-                    ctx.save(); ctx.strokeStyle = '#EDD011'; ctx.lineWidth = 1.5; ctx.setLineDash([6, 4]);
-                    ctx.beginPath(); ctx.moveTo(x.left, yp); ctx.lineTo(x.right, yp); ctx.stroke();
-                    ctx.fillStyle = '#EDD011'; ctx.font = '11px Arial';
-                    ctx.fillText('Meta 15', x.right - 48, yp - 5); ctx.restore();
+                id: 'linhaMeta',
+
+                // Executado após o desenho do gráfico, para sobrepor a linha de meta
+                afterDraw(grafico) {
+                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+
+                    // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
+                    const posicaoMetaY = eixoY.getPixelForValue(15);
+
+                    contexto.save(); // Salva o estado atual do canvas antes de desenhar
+
+                    // Configura o estilo da linha tracejada amarela
+                    contexto.strokeStyle = '#EDD011';
+                    contexto.lineWidth = 1.5;
+                    contexto.setLineDash([6, 4]); // Padrão: 6px traço, 4px espaço
+
+                    // Desenha a linha horizontal da meta de ponta a ponta no gráfico
+                    contexto.beginPath();
+                    contexto.moveTo(eixoX.left, posicaoMetaY);
+                    contexto.lineTo(eixoX.right, posicaoMetaY);
+                    contexto.stroke();
+
+                    // Escreve o rótulo "Meta 15" logo acima da linha, alinhado à direita
+                    contexto.fillStyle = '#EDD011';
+                    contexto.font = '11px Arial';
+                    contexto.fillText('Meta 15', eixoX.right - 48, posicaoMetaY - 5);
+
+                    contexto.restore(); // Restaura o estado do canvas após o desenho
                 }
             }]
         });
 
+
+        //  Gráfico de Linha: Histórico de Luminosidade (Últimas 24 Horas) 
         new Chart(document.getElementById('hist_lux_chart'), {
             type: 'line',
             data: {
-                labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
+                // Horas do dia (00h–23h) exibidas no eixo X
+                labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',
+                    '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
                 datasets: [{
-                    label: 'PPFD', data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 79.13, 123.43, 181.66, 252.43, 300.85, 390.02, 368.85, 300.64, 280.51, 163.27, 92.67, 3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
-                    borderColor: '#FA8016', backgroundColor: 'rgba(250,128,22,0.08)', fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2.5
+                    label: 'PPFD',
+                    // Leituras de PPFD 
+                    data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 79.13, 123.43, 181.66,
+                        252.43, 300.85, 390.02, 368.85, 300.64, 280.51, 163.27, 92.67,
+                        3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
+                    borderColor: '#FA8016',                    // Cor da linha
+                    backgroundColor: 'rgba(250,128,22,0.08)', 
+                    fill: true,       // Ativa o preenchimento entre a linha e o eixo X
+                    tension: 0.4,     // Suaviza a curva da linha 
+                    pointRadius: 0,   // Oculta os pontos individuais para visual mais limpo
+                    borderWidth: 2.5
                 }]
             },
-            options: { plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 700 }, x: { grid: { display: false }, ticks: { maxRotation: 0 } } } },
+            options: {
+                plugins: {
+                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+                },
+                scales: {
+                    y: { min: 0, max: 700 },   // Faixa do eixo Y
+                    x: {
+                        grid: { display: false },   // Remove as linhas de grade verticais
+                    }
+                }
+            },
             plugins: [{
-                id: 'zona', beforeDraw(c) {
-                    const { ctx, scales: { y, x } } = c;
-                    const y1 = y.getPixelForValue(400), y2 = y.getPixelForValue(200);
-                    ctx.save(); ctx.fillStyle = 'rgba(87,175,50,0.12)';
-                    ctx.fillRect(x.left, y1, x.right - x.left, y2 - y1);
-                    ctx.setLineDash([]); ctx.fillStyle = '#57AF32'; ctx.font = '11px Arial'; ctx.textAlign = 'center';
-                    ctx.fillText('ZONA IDEAL (200-400 PPFD)', (x.left + x.right) / 2, (y1 + y2) / 2 + 4); ctx.restore();
+                id: 'zonaIdealPPFD',
+
+                // Executado antes do desenho do gráfico, para que a faixa fique atrás da linha
+                beforeDraw(grafico) {
+                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+
+                    // faixa ideal
+                    const topoZonaIdeal = eixoY.getPixelForValue(400);
+                    const baseZonaIdeal = eixoY.getPixelForValue(200);
+
+                    // Calcula o centro da faixa para posicionar o rótulo
+                    const centroHorizontal = (eixoX.left + eixoX.right) / 2;
+                    const centroVertical = (topoZonaIdeal + baseZonaIdeal) / 2;
+
+
+                    //  a zona ideal
+                    contexto.fillStyle = 'rgba(87,175,50,0.12)';
+                    contexto.fillRect(
+                        eixoX.left,                            // X inicial (borda esquerda do gráfico)
+                        topoZonaIdeal,                         // Y inicial (topo da faixa = 400 ppfd)
+                        eixoX.right - eixoX.left,              // Largura total do gráfico
+                        baseZonaIdeal - topoZonaIdeal          // Altura da faixa (entre 200 e 400 ppfd)
+                    );
+
+                    // Escreve o rótulo centralizado dentro da faixa verde
+                    contexto.fillStyle = '#57AF32';
+                    contexto.font = '11px Arial';
+                    contexto.textAlign = 'center';
+                    contexto.fillText('ZONA IDEAL (200-400 PPFD)', centroHorizontal, centroVertical + 4);
+
+                    contexto.restore(); // Restaura o estado do canvas após o desenho
                 }
             }]
         });
     </script>
-
 </body>
 
 </html>
