@@ -91,20 +91,28 @@
     function analisar() {
 
 
+        // Criação das variaveis convertidas com o tipo Number
         let qtde = Number(ipt_qtd.value)
         let preco = Number(ipt_preço.value)
 
+        // Cálculo do faturamento mensal bruto, preço por unidade * quantidade
         let totalMensal = preco * qtde
+
+        // Cálculo do faturamento anual bruto, 12 meses
         let totalAnual = totalMensal * 12
 
+        // Estimativa de perda mensal baseada na FAG(Fundação Assis Gurgax)em uma taxa de 30% de desperdício
         let nivelPerdaMensal = totalMensal * 0.30
+
+        // Estimativa de prejuízo financeiro anual causado pelo desperdício
         let nivelPerdaAnual = nivelPerdaMensal * 12
 
+        // Valor que pode ser recuperado, o sistema reduz 70% das perdas atuais
         let perdasReduzidas = nivelPerdaAnual * 0.70
         let novoFaturamento = totalAnual - nivelPerdaAnual + perdasReduzidas
 
 
-
+        // Validações para que os cálculos sejam feitos so com valores positivos
         if (qtde <= 0) {
             alert(`Por favor, insira uma quantidade válida maior que 0`)
 
@@ -112,6 +120,7 @@
             alert(`Por favor, insira um preço válido maior que 0`)
         } else {
 
+            // Exibição das mensagens com o valor da moeda brasileira
             msgCalculadora.innerHTML = `
             Alfaces perdidas <br >anualmente<br>
             <b class ="valorCalculadora"> ${nivelPerdaAnual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
