@@ -137,25 +137,13 @@
                     // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
                     const posicaoMetaY = eixoY.getPixelForValue(15);
 
-                    contexto.save(); // Salva o estado atual do canvas antes de desenhar
-
                     // Configura o estilo da linha tracejada amarela
                     contexto.strokeStyle = '#EDD011';
-                    contexto.lineWidth = 1.5;
-                    contexto.setLineDash([6, 4]); // Padrão: 6px traço, 4px espaço
-
                     // Desenha a linha horizontal da meta de ponta a ponta no gráfico
-                    contexto.beginPath();
                     contexto.moveTo(eixoX.left, posicaoMetaY);
                     contexto.lineTo(eixoX.right, posicaoMetaY);
                     contexto.stroke();
 
-                    // Escreve o rótulo "Meta 15" logo acima da linha, alinhado à direita
-                    contexto.fillStyle = '#EDD011';
-                    contexto.font = '11px Arial';
-                    contexto.fillText('Meta 15', eixoX.right - 48, posicaoMetaY - 5);
-
-                    contexto.restore(); // Restaura o estado do canvas após o desenho
                 }
             }]
         });
@@ -224,7 +212,6 @@
                     contexto.textAlign = 'center';
                     contexto.fillText('ZONA IDEAL (200-400 PPFD)', centroHorizontal, centroVertical + 4);
 
-                    contexto.restore(); // Restaura o estado do canvas após o desenho
                 }
             }]
         });
