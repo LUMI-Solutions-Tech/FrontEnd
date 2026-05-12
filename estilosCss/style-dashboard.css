@@ -150,13 +150,15 @@ main {
 }
 
 .card.laranja {
-  background: #fcf5eb;
-  color: #fa8016;
+  background: #deddddda;
+  color: black;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .card.verde-claro {
-  background: #dff5de;
-  color: #57af32;
+  background: #deddddda;
+  color: black;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .verde-txt {
