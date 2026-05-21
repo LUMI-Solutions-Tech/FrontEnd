@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Cadastro | Lumi Solutions</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="./estilosCss/styles.css">
+  <link rel="stylesheet" href="./estilosCss/loginCadastro.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body onload="listar()">
+
+  <header id="home">
+    <div class="cabecalho-menu">
+
+      <div class="logo-container">
+        <img src="./assets/icons/logo.svg" alt="Logo Lumi Solutions" class="img-logo">
+        <p class="nome-logo">Lumi Solutions Tech</p>
+      </div>
+
+      <div class="menu">
+        <a href="index.html" class="opcoes-menu">Início</a>
+        <a href="calculadora.html" class="opcoes-menu">Calculadora</a>
+        <a href="sobre.html" class="opcoes-menu">Sobre nós</a>
+        <a href="#rodape" class="opcoes-menu">Contato</a>
+        <a href="login.html" class="opcoes-menu login">Entre</a>
+        <a href="cadastro.html" class="opcoes-menu cadastro">Cadastre-se</a>
+      </div>
+
+    </div>
+  </header>
+
+  <section>
+
+    <div class="container-cadastro">
+
+      <img
+        src="./assets/login-cadastro/img-cadastro.svg"
+        alt="Desenho de uma mão segurando um celular verificando uma senha."
+        class="img-cadastro">
+
+      <div class="inputsCadastro">
+
+        <div class="topo-login">
+
+          <p class="boasvindas-text">
+            Bem vindo ao <strong>LUMI</strong>
+          </p>
+
+          <div class="toggle-botoes">
+
+            <button class="btn-toggle toggle-link">
+              <a href="login.html">Login</a>
+            </button>
+
+            <button class="btn-toggle active toggle-link">
+              <a href="cadastro.html">Cadastrar</a>
+            </button>
+
+          </div>
+
+        </div>
+
+        <h2 class="title-cadastro">Cadastro</h2>
+
+        <p class="text-cadastro">
+          Vamos deixar tudo pronto para que você possa acessar sua conta pessoal.
+        </p>
+
+        <div class="cadastro-nome">
+
+          <div class="grupo-input">
+            <input type="text" id="ipt_primeiroNome" class="ipt_cadastro">
+            <label>Primeiro nome</label>
+          </div>
+
+          <div class="grupo-input">
+            <input type="text" id="ipt_ultimoNome" class="ipt_cadastro">
+            <label>Último nome</label>
+          </div>
+
+        </div>
+
+        <div class="cadastro-email">
+
+          <div class="grupo-input">
+            <input type="text" id="ipt_email" class="ipt_cadastro">
+            <label>Email</label>
+          </div>
+
+          <div class="grupo-input">
+            <input type="text" id="ipt_confEmail" class="ipt_cadastro">
+            <label>Confirme o seu email</label>
+          </div>
+
+        </div>
+
+        <div class="grupo-input">
+          <input
+            type="password"
+            id="ipt_senha"
+            class="ipt_cadastroSenha"
+            oninput="validarSenha()">
+          <label>Senha</label>
+        </div>
+
+        <div id="msgSenha"></div>
+
+        <div class="grupo-input">
+          <input type="password" id="ipt_confSenha" class="ipt_cadastroSenha">
+          <label>Confirme a sua senha</label>
+        </div>
+
+        <div class="grupo-input">
+          <input type="text" id="codigo_input" class="ipt_cadastro">
+          <label>Código de ativação</label>
+        </div>
+
+        <button onclick="cadastrar()" class="btn-cadastro">
+          Crie sua conta
+        </button>
+
+        <br><br>
+
+        <p class="msgCadastro">
+          Já tem uma conta?
+
+          <a class="msgLoginLink" href="login.html">
+            <span>Faça login</span>
+          </a>
+        </p>
+
+        <div id="msgSucessoNoCadastro"></div>
+
+        <div class="alerta_erro">
+
+          <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</body>
+
+</html>
+
+<script>
+
+  let listaEmpresasCadastradas = [];
+
+  function cadastrar() {
+
+    let primeiroNome = ipt_primeiroNome.value.trim();
+    let ultimoNome = ipt_ultimoNome.value.trim();
+
+    let nomeVar = `${primeiroNome} ${ultimoNome}`;
+
+    let emailVar = ipt_email.value.trim();
+    let confEmail = ipt_confEmail.value.trim();
+
+    let senhaVar = ipt_senha.value.trim();
+    let confirmacaoSenhaVar = ipt_confSenha.value.trim();
+
+    let codigoVar = codigo_input.value.trim();
+
+    let erros = '';
+
+    let idEmpresaVincular;
+
+    // VALIDAÇÃO NOME
+
+    if (primeiroNome.length < 3) {
+      erros += `Informe o seu nome / `;
+    }
+
+    if (ultimoNome.length == 0) {
+      erros += `Informe o seu sobrenome / `;
+    }
+
+    // VALIDAÇÃO EMAIL
+
+    if (emailVar.length == 0 || emailVar.length < 10) {
+
+      erros += `Informe o seu e-mail / `;
+
+    } else if (!emailVar.includes('@')) {
+
+      erros += `Insira um e-mail válido / `;
+
+    }
+
+    // CONFIRMAÇÃO EMAIL
+
+    if (emailVar.length > 0) {
+
+      if (confEmail.length == 0) {
+
+        erros += `Confirme o seu e-mail / `;
+
+      } else if (confEmail != emailVar) {
+
+        erros += `O e-mail de confirmação não coincide / `;
+
+      }
+
+    }
+
+    // VALIDAÇÃO SENHA
+
+    if (senhaVar.length == 0) {
+      erros += `Escolha sua senha / `;
+    }
+
+    // CONFIRMAÇÃO SENHA
+
+    if (senhaVar.length > 0) {
+
+      if (confirmacaoSenhaVar.length == 0) {
+
+        erros += `Confirme sua senha / `;
+
+      } else if (confirmacaoSenhaVar != senhaVar) {
+
+        erros += `A confirmação de senha está diferente / `;
+
+      }
+
+    }
+
+    // CNPJ EMPRESA
+
+    if (codigoVar == '') {
+      erros += `Informe o CNPJ da empresa / `;
+    }
+
+    // VERIFICA CAMPOS
+
+    if (erros != '') {
+
+      cardErro.style.display = "block";
+
+      mensagem_erro.innerHTML = erros;
+
+      setTimeout(sumirMensagem, 5000);
+
+      return false;
+
+    }
+
+    // VERIFICA EMPRESA PELO CNPJ
+
+    let codigoValido = false;
+
+    console.log(listaEmpresasCadastradas);
+
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+
+      if (listaEmpresasCadastradas[i].cnpj == codigoVar) {
+
+        idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa;
+
+        codigoValido = true;
+
+        break;
+
+      }
+
+    }
+
+    // CNPJ NÃO ENCONTRADO
+
+    if (!codigoValido) {
+
+      cardErro.style.display = "block";
+
+      mensagem_erro.innerHTML = "CNPJ da empresa inválido";
+
+      setTimeout(sumirMensagem, 5000);
+
+      return false;
+
+    }
+
+    // FETCH CADASTRO
+
+    fetch("/usuarios/cadastrar", {
+
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idEmpresaVincularServer: idEmpresaVincular
+
+      }),
+
+    })
+
+      .then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          msgSucessoNoCadastro.innerHTML = `
+            <p class="msg-sucesso-cadastro">
+              <span>
+                Você foi cadastrado com sucesso!<br>
+                Redirecionando para login...
+              </span>
+            </p>
+          `;
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, 2000);
+
+          limparFormulario();
+
+          finalizarAguardar();
+
+        } else {
+
+          resposta.text().then(texto => {
+
+            cardErro.style.display = "block";
+
+            mensagem_erro.innerHTML = texto;
+
+          });
+
+          throw "Houve um erro ao tentar realizar o cadastro!";
+
+        }
+
+      })
+
+      .catch(function (erro) {
+
+        console.log(`#ERRO: ${erro}`);
+
+        finalizarAguardar();
+
+      });
+
+    return false;
+
+  }
+
+  function validarSenha() {
+
+    let senha = ipt_senha.value;
+
+    if (senha == '') {
+
+      msgSenha.innerHTML = '';
+
+      return;
+
+    }
+
+    if (senha.length < 6) {
+
+      msgSenha.innerHTML = 'Senha fraca (mínimo 6 caracteres)';
+
+    } else if (senha.length >= 6 && senha.length < 10) {
+
+      msgSenha.innerHTML = 'Senha média';
+
+    } else {
+
+      msgSenha.innerHTML = 'Senha forte ✅';
+
+    }
+
+  }
+
+  function listar() {
+
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+
+      .then(function (resposta) {
+
+        if (!resposta.ok) {
+          throw new Error("Erro ao listar empresas");
+        }
+
+        return resposta.json();
+
+      })
+
+      .then((empresas) => {
+
+        console.log(empresas);
+
+        empresas.forEach((empresa) => {
+          listaEmpresasCadastradas.push(empresa);
+        });
+
+      })
+
+      .catch(function (erro) {
+
+        console.log(`#ERRO: ${erro}`);
+
+      });
+
+  }
+
+  function sumirMensagem() {
+
+    cardErro.style.display = "none";
+
+  }
+
+</script>

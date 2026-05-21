@@ -1,0 +1,372 @@
+/* PARTE RAISSA */
+body {
+    font-family: "Poppins", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+#home {
+    background-color: #fff;
+}
+
+.cabecalho-menu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 6px 12px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 40%;
+}
+
+.img-logo {
+    width: 10%;
+}
+
+.nome-logo {
+    font-weight: 600;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 45%;
+}
+
+.opcoes-menu {
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+    color: #000;
+}
+
+.opcoes-menu:hover {
+    color: #009236;
+}
+
+.login {
+    background-color: #009236;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 10%;
+}
+
+.login:hover {
+    background-color: beige;
+    color: #009236;
+    border: 2px solid #009236;
+}
+
+.cadastro {
+    color: #009236;
+    border: 2px solid #009236;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+.cadastro:hover {
+    background-color: #009236;
+    color: #fff;
+}
+
+.container {
+    /* height: 100vh; */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+    background: linear-gradient(to bottom,
+            #156915 5%,
+            #fff 100%);
+}
+
+.text {
+    text-align: center;
+}
+
+.title-container {
+    width: 60%;
+    font-size: 300%;
+    margin: 0;
+}
+
+.text-container {
+    width: 45%;
+    font-size: 112.5%;
+    margin-bottom: 50px;
+}
+
+.container-img {
+    width: 48%;
+}
+
+/* parte2-Jonas*/
+
+.fundo-parte2 {
+    background-color: white;
+}
+
+
+.fundo2-parte2 {
+    background-color: white;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.fundo3-parte2 {
+    background-color: white;
+}
+
+.titulo-parte2 {
+    display: flex;
+    color: #023f3a;
+    font-size: 44px;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteudo-parte2 {
+    color: #525560;
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+    line-height: 1.6;
+    margin: auto;
+}
+
+.botao-parte2 {
+    display: block;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: Arial, sans-serif;
+    background-color: #156915;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 23px 240px;
+    margin: auto;
+    margin-top: 52px;
+    margin-bottom: 100px;
+    width: 10%;
+    text-decoration: none;
+    text-align: center;
+}
+
+/*parte3NossaMissao - Matheus*/
+
+.containerNossaMissao {
+    display: flex;
+    justify-content: center;
+    margin: 6% 0;
+}
+
+.missaoPai {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 85%;
+    gap: 50px;
+}
+
+.tituloMissao {
+    font-size: 48px;
+}
+
+.textoMissao {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.divIcones {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.icones {
+    width: 35px;
+}
+
+.iconesMissao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.imagemMissao {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.imagensPequenas {
+    display: flex;
+    gap: 30px;
+}
+
+
+/* parte4EscolhaMelhor- Mickaela */
+
+.tituloParte4 {
+    height: 20dvh;
+    color: #023F3A;
+    font-size: 40px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.conteineImagensParte4 {
+    height: 60dvh;
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteineImagensParte4 img {
+    display: flex;
+    height: 90%;
+    width: 90%;
+}
+
+.itemPrimeiraImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('../assets/home/imagem1Tecnologia.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+
+.itemSegundaImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('../assets/home/imagem2ProducaoSustentavel.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+
+.itemTerceiraImagem {
+    height: 80%;
+    width: 20%;
+    background-image: url('../assets/home/image3AltaProdutividade.png');
+    background-repeat: no-repeat;
+    border-radius: 5%;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+
+}
+
+.textoparte4 {
+    color: #ffffff;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.064));
+    
+    border-radius: 5%;
+    
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.tituloparte4 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.paragrafoParte4 {
+    margin: 0;
+    font-size: 12px;
+}
+
+
+/*Parte do joao */
+.rodape{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.link-rodape{
+    display: flex;
+    gap: 50px;
+    /* flex-direction: column; */
+}
+
+.opcoes-rodape {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #404145;
+}
+
+.opcoes-rodape:hover {
+    color: #013209;
+    font-weight: 600;
+}
+
+.informacoes{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 30%;
+}
+
+.img-mapa{
+    width: 100%;
+}
+
+.icones-informacoes{
+    width: 45%;
+}
+
+.img-informacoes{
+    width: 15%;
+}
+.titulo-informacoes{
+    font-size: 16px;
+    margin-bottom: 0;
+}
+.texto-informacoes{
+    font-size: 12px;
+    color: #525560;
+    margin: 0;
+}
+.direitos{
+    font-size:10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}

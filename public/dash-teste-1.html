@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Lumi Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="estilosCss/style-dashboard.css">
+</head>
+
+<body>
+
+    <header id="home">
+        <div class="cabecalho-menu">
+            <div class="logo-container">
+                <img src="imagens/icons/logo.svg" alt="Logo Lumi Solutions" class="img-logo">
+                <p class="nome-logo">Lumi Solutions Tech</p>
+            </div>
+
+            <div class="menu">
+                <a href="index.html" target="_blank" class="opcoes-menu">Início</a>
+                <a href="calculadora.html" target="_blank" class="opcoes-menu">Calculadora</a>
+                <a href="sobre.html" target="_blank" class="opcoes-menu">Sobre nós</a>
+                <a href="#rodape" class="opcoes-menu">Contato</a>x
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="topo">
+            <div>
+                <h2>Dashboard — Visão Geral</h2>
+                <p>Estufa A1 · Verde Vida Ltda · Sensor LED Full Spectrum</p>
+            </div>
+        </div>
+
+        <div class="alerta">
+            <div> <b>Central de Ação</b> — Luminosidade abaixo do nível crítico para fotossíntese. Considere ligar as
+                lâmpadas de suplementação.</div>
+            <button class="btn-laranja">⚠ AÇÃO REQUERIDA</button>
+        </div>
+
+        <div class="grid-4">
+            <div class="card laranja">
+                <small>Média da Última Hora</small><b>180 <span>ppfd</span></b><small>Ideal:
+                    200-400 ppfd</small>
+            </div>
+            <div class="card verde-claro"><small>DLI Acumulado Hoje</small><b>12.5
+                    <span>mol/m²/d</span></b><small>Fotossíntese ativa</small>
+            </div>
+
+            <div class="card laranja">
+                <small>Estufa A</small><b>18.2 <span>dli</span></b><small>
+                    Estável</small>
+            </div>
+            
+            <div class="card verde-claro">
+                <small>Estufa B</small><b>27.5 <span>dli</span></b><small>
+                    Crítico</small>
+            </div>
+
+            
+        <div class="card branco">
+            <div class="linha-entre">
+                <b>DLI por Dia — Últimos 7 Dias</b>
+                <div><span class="badge verde">● Com LED</span> <span class="badge amarelo">● Meta</span></div>
+            </div>
+            <canvas id="chart_dli"></canvas>
+        </div>
+
+        <div class="card branco">
+            <b>Resumo da Semana</b>
+            <div class="resumo-linha">
+                <div><small>Melhor dia</small>
+                    <p>Quarta-feira</p>
+                </div>
+                <div><b class="verde-txt">19.2</b> <span class="badge verde">pico</span></div>
+            </div>
+            <div class="resumo-linha">
+                <div><small>Pior dia</small>
+                    <p>Domingo</p>
+                </div>
+                <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
+            </div>
+            <div class="resumo-linha sem-borda">
+                <div>
+                    <small>Meta</small>
+                    <p>> 15 mol/m²/dia</p>
+                </div>
+                <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
+            </div>
+        </div>
+        <a href="rodape">
+            <div class="card branco">
+                <div class="linha-entre">
+                    <b>Histórico de Luminosidade — Últimas 24 horas</b>
+                    <span class="badge verde">● Monitoramento ativo</span>
+                </div>
+                <canvas id="hist_lux_chart"></canvas>
+            </div>
+        </a>
+
+
+        </div>
+
+
+    </main>
+
+    <script>
+        //  DLI por Dia 
+        new Chart(document.getElementById('chart_dli'), {
+            type: 'bar',
+            data: {
+                // Dias da semana exibidos no eixo X
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'DLI',
+                    // Valores de DLI dia da semana
+                    data: [16.8, 17.2, 17.5, 17.0, 11.3, 11.8, 11.5],
+                    backgroundColor: ['#57AF32', '#57AF32', '#57AF32', '#57AF32', '#FA8016', '#FA8016', '#FA8016'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+                },
+                scales: {
+                    y: { max: 20 },            // Limite máximo do eixo Y 
+                    x: { grid: { display: false } } // Remove as linhas de grade
+                }
+            },
+            plugins: [{
+                id: 'linhaMeta',
+
+                // Executado após o desenho do gráfico, para sobrepor a linha de meta
+                afterDraw(grafico) {
+                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+
+                    // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
+                    const posicaoMetaY = eixoY.getPixelForValue(15);
+
+                    // Configura o estilo da linha tracejada amarela
+                    contexto.strokeStyle = '#EDD011';
+                    // Desenha a linha horizontal da meta de ponta a ponta no gráfico
+                    contexto.moveTo(eixoX.left, posicaoMetaY);
+                    contexto.lineTo(eixoX.right, posicaoMetaY);
+                    contexto.stroke();
+
+                }
+            }]
+        });
+
+
+        //  Gráfico de Linha: Histórico de Luminosidade (Últimas 24 Horas) 
+        new Chart(document.getElementById('hist_lux_chart'), {
+            type: 'line',
+            data: {
+                // Horas do dia (00h–23h) exibidas no eixo X
+                labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',
+                    '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
+                datasets: [{
+                    label: 'PPFD',
+                    // Leituras de PPFD 
+                    data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 79.13, 123.43, 181.66,
+                        252.43, 300.85, 390.02, 368.85, 300.64, 280.51, 163.27, 92.67,
+                        3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
+                    borderColor: '#FA8016',                    // Cor da linha
+                    backgroundColor: 'rgba(250,128,22,0.08)',
+                    fill: true,       // Ativa o preenchimento entre a linha e o eixo X
+                    tension: 0.4,     // Suaviza a curva da linha 
+                    pointRadius: 0,   // Oculta os pontos individuais para visual mais limpo
+                    borderWidth: 2.5
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+                },
+                scales: {
+                    y: { min: 0, max: 700 },   // Faixa do eixo Y
+                    x: {
+                        grid: { display: false },   // Remove as linhas de grade verticais
+                    }
+                }
+            },
+            plugins: [{
+                id: 'zonaIdealPPFD',
+
+                // Executado antes do desenho do gráfico, para que a faixa fique atrás da linha
+                beforeDraw(grafico) {
+                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+
+                    // faixa ideal
+                    const topoZonaIdeal = eixoY.getPixelForValue(400);
+                    const baseZonaIdeal = eixoY.getPixelForValue(200);
+
+                    // Calcula o centro da faixa para posicionar o rótulo
+                    const centroHorizontal = (eixoX.left + eixoX.right) / 2;
+                    const centroVertical = (topoZonaIdeal + baseZonaIdeal) / 2;
+
+
+                    //  a zona ideal
+                    contexto.fillStyle = 'rgba(87,175,50,0.12)';
+                    contexto.fillRect(
+                        eixoX.left,                            // X inicial (borda esquerda do gráfico)
+                        topoZonaIdeal,                         // Y inicial (topo da faixa = 400 ppfd)
+                        eixoX.right - eixoX.left,              // Largura total do gráfico
+                        baseZonaIdeal - topoZonaIdeal          // Altura da faixa (entre 200 e 400 ppfd)
+                    );
+
+                    // Escreve o rótulo centralizado dentro da faixa verde
+                    contexto.fillStyle = '#57AF32';
+                    contexto.font = '11px Arial';
+                    contexto.textAlign = 'center';
+                    contexto.fillText('ZONA IDEAL (200-400 PPFD)', centroHorizontal, centroVertical + 4);
+
+                }
+            }]
+        });
+    </script>
+</body>
+
+</html>
