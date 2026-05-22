@@ -27,7 +27,7 @@
                 <a href="index.html" target="_blank" class="opcoes-menu">Início</a>
                 <a href="calculadora.html" target="_blank" class="opcoes-menu">Calculadora</a>
                 <a href="sobre.html" target="_blank" class="opcoes-menu">Sobre nós</a>
-                <a href="suporte.html" target="_blank" class="opcoes-menu" >Suporte</a>
+                <a href="suporte.html" target="_blank" class="opcoes-menu">Suporte</a>
                 <a href="#rodape" class="opcoes-menu">Contato</a>x
             </div>
         </div>
@@ -37,8 +37,9 @@
 
         <div class="topo">
             <div>
-                <h2>Dashboard — Visão Geral</h2>
-                <p>Estufa A1 · Verde Vida Ltda · Sensor LED Full Spectrum</p>
+                <h2>Dashboard — Visão — Estufa A </h2>
+                <p>Estufa A · Verde Vida Ltda · Sensor LED Full Spectrum</p>
+                <button class="btn-voltar" onclick="Voltar()">Voltar</button>
             </div>
         </div>
 
@@ -50,60 +51,66 @@
 
         <div class="grid-4">
             <div class="card laranja">
-                <small>Média da Última Hora</small><b>180 <span>ppfd</span></b><small>Ideal:
+                <small>Média da Última Hora - Estufa A</small><b>180 <span>ppfd</span></b><small>Ideal:
                     200-400 ppfd</small>
             </div>
-            <div class="card verde-claro"><small>DLI Acumulado Hoje</small><b>12.5
+            <div class="card verde-claro"><small>DLI Acumulado Hoje - Estufa A</small><b>12.5
                     <span>mol/m²/d</span></b><small>Fotossíntese ativa</small></div>
         </div>
 
+        <div class="painel-luminosidade">
 
-        <div class="card branco">
-            <div class="linha-entre">
-                <b>DLI por Dia — Últimos 7 Dias</b>
-                <div><span class="badge verde">● Com LED</span> <span class="badge amarelo">● Meta</span></div>
+            <div class="coluna1">
+                <div class="card branco grafico-principal">
+                    <div class="linha-entre">
+                        <b>DLI por Dia — Últimos 7 Dias - Estufa A</b>
+                        <div>
+                            <span class="badge verde">● Com LED</span>
+                            <span class="badge amarelo">● Meta</span>
+                        </div>
+                    </div>
+                    <canvas id="chart_dli"></canvas>
+                </div>
             </div>
-            <canvas id="chart_dli"></canvas>
+
+            <div class="coluna2">
+                
+                <div class="card branco">
+                    <div class="linha-entre">
+                        <b>Histórico de Luminosidade — Últimas 24 horas - Estufa A</b>
+                        <span class="badge verde">● Monitoramento ativo</span>
+                    </div>
+                    <canvas id="hist_lux_chart"></canvas>
+                </div>
+                <div class="card branco">
+                    <b>Resumo da Semana - Estufa A</b>
+                    <div class="resumo-linha">
+                        <div>
+                            <small>Melhor dia</small>
+                            <p>Quarta-feira</p>
+                        </div>
+                        <div><b class="verde-txt">19.2</b> <span class="badge verde">pico</span></div>
+                    </div>
+                    <div class="resumo-linha">
+                        <div>
+                            <small>Pior dia</small>
+                            <p>Domingo</p>
+                        </div>
+                        <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
+                    </div>
+                    <div class="resumo-linha sem-borda">
+                        <div>
+                            <small>Meta</small>
+                            <p>> 15 mol/m²/dia</p>
+                        </div>
+                        <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="card branco">
-            <b>Resumo da Semana</b>
-            <div class="resumo-linha">
-                <div><small>Melhor dia</small>
-                    <p>Quarta-feira</p>
-                </div>
-                <div><b class="verde-txt">19.2</b> <span class="badge verde">pico</span></div>
-            </div>
-            <div class="resumo-linha">
-                <div><small>Pior dia</small>
-                    <p>Domingo</p>
-                </div>
-                <div><b class="vermelho-txt">11.3</b> <span class="badge vermelho">baixo</span></div>
-            </div>
-            <div class="resumo-linha sem-borda">
-                <div>
-                    <small>Meta</small>
-                    <p>> 15 mol/m²/dia</p>
-                </div>
-                <div><b style="color:#999">71%</b> <span class="badge cinza">dos dias</span></div>
-            </div>
-        </div>
-        <a href="rodape">
-            <div class="card branco">
-                <div class="linha-entre">
-                    <b>Histórico de Luminosidade — Últimas 24 horas</b>
-                    <span class="badge verde">● Monitoramento ativo</span>
-                </div>
-                <canvas id="hist_lux_chart"></canvas>
-            </div>
-        </a>
-
-
-        </div>
-
-
     </main>
-
     <script>
         //  DLI por Dia 
         new Chart(document.getElementById('chart_dli'), {
@@ -155,8 +162,8 @@
             type: 'line',
             data: {
                 // Horas do dia (00h–23h) exibidas no eixo X
-                labels: ['00h', '01h', '02h', '03h', '04h', '05h', '06h', '07h', '08h', '09h', '10h', '11h',
-                    '12h', '13h', '14h', '15h', '16h', '17h', '18h', '19h', '20h', '21h', '22h', '23h'],
+                labels: ['00h', '', '02h', '', '04h', '', '06h', '', '08h', '', '10h', '',
+                    '12h', '', '14h', '', '16h', '', '18h', '', '20h', '', '22h', ''],
                 datasets: [{
                     label: 'PPFD',
                     // Leituras de PPFD 
@@ -216,6 +223,10 @@
                 }
             }]
         });
+
+        function Voltar() {
+            window.location.href = "dashboard-geral.html";
+        }
     </script>
 </body>
 
