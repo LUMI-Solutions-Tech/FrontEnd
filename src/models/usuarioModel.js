@@ -16,8 +16,8 @@ function cadastrar(nome, email, senha, fkEmpresa) {
 
     var instrucaoSql = `
         INSERT INTO Usuario 
-        (nome, email, senha, cargo, fkUsuarioEmpresa) VALUES 
-        ('${nome}', '${email}', '${senha}', 'Funcionário', '${fkEmpresa}');`;
+        (nome, email, senha, fkEmpresa) VALUES 
+        ('${nome}', '${email}', '${senha}', '${fkEmpresa}');`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
