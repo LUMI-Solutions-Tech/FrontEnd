@@ -114,7 +114,7 @@
 .itemPrimeiraImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/sobre-nós/imagemMonitoramentointeligente.png');
+    background-image: url('../assets/sobre-nós/imagemMonitoramentointeligente.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -125,7 +125,7 @@
 .itemSegundaImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/sobre-nós/imagemQualidadeCultivo.png');
+    background-image: url('../assets/sobre-nós/imagemQualidadeCultivo.png');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -136,7 +136,7 @@
 .itemTerceiraImagemImpactos {
     height: 80%;
     width: 25%;
-    background-image: url('/imagens/sobre-nós/dadosimpacto.webp');
+    background-image: url('../assets/sobre-nós/dadosimpacto.webp');
     background-repeat: no-repeat;
     border-radius: 5%;
     background-size: cover;
@@ -262,34 +262,34 @@
 
 /* IMAGEM DE CADA INTEGRANTE (separada por classe) */
 .joao {
-    background-image: url("../imagens/integrantes/joao.jpg"); 
+    background-image: url("../assets/integrantes/joao.jpg"); 
     background-size: cover;
     background-position: center;
 }
 
 .jonas {
-    background-image: url("../imagens/integrantes/jonas.jpg"); 
+    background-image: url("../assets/integrantes/jonas.jpg"); 
     background-size: cover;
     background-position: bottom;
 }
 .matheus {
-    background-image: url("../imagens/integrantes/matheus.jpg"); 
+    background-image: url("../assets/integrantes/matheus.jpg"); 
     background-size: cover;
     background-position: center;
 }
 .mickaela {
-    background-image: url("../imagens/integrantes/mickaela.jpg"); 
+    background-image: url("../assets/integrantes/mickaela.jpg"); 
     background-size: cover;
     background-position: center;
 }
 .nicolas {
-    background-image: url("../imagens/integrantes/nicolas.jpg"); 
+    background-image: url("../assets/integrantes/nicolas.jpg"); 
     background-size: cover;
     background-position: bottom;
 }
 
 .raissa {
-    background-image: url("../imagens/integrantes/raissa2.jpg"); 
+    background-image: url("../assets/integrantes/raissa2.jpg"); 
     background-size: cover;
     background-position: top;
 }

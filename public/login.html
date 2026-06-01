@@ -84,19 +84,16 @@
         let senhaVar = ipt_senha.value.trim();
         let erros = '';
 
-        // VALIDAÇÃO EMAIL
         if (emailVar == '') {
             erros += `Informe o seu e-mail / `;
         } else if (!emailVar.includes('@')) {
             erros += `Insira um e-mail válido / `;
         }
 
-        // VALIDAÇÃO SENHA
         if (senhaVar == '') {
             erros += `Informe sua senha / `;
         }
 
-        // MOSTRAR ERROS
         if (erros != '') {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML = erros;

@@ -153,39 +153,23 @@
 
         </div>
       </div>
-
     </div>
-
   </section>
-
 </body>
-
 </html>
-
 <script>
-
-  let listaEmpresasCadastradas = [];
-
+  let listaEmpresasCadastradas = []
   function cadastrar() {
-
     let primeiroNome = ipt_primeiroNome.value.trim();
     let ultimoNome = ipt_ultimoNome.value.trim();
-
-    let nomeVar = `${primeiroNome} ${ultimoNome}`;
-
+    let nomeVar = `${primeiroNome} ${ultimoNome}`
     let emailVar = ipt_email.value.trim();
     let confEmail = ipt_confEmail.value.trim();
-
-    let senhaVar = ipt_senha.value.trim();
+    let senhaVar = ipt_senha.value.trim()
     let confirmacaoSenhaVar = ipt_confSenha.value.trim();
-
     let codigoVar = codigo_input.value.trim();
-
     let erros = '';
-
     let idEmpresaVincular;
-
-    // VALIDAÇÃO NOME
 
     if (primeiroNome.length < 3) {
       erros += `Informe o seu nome / `;
@@ -195,137 +179,76 @@
       erros += `Informe o seu sobrenome / `;
     }
 
-    // VALIDAÇÃO EMAIL
-
     if (emailVar.length == 0 || emailVar.length < 10) {
-
       erros += `Informe o seu e-mail / `;
-
     } else if (!emailVar.includes('@')) {
-
       erros += `Insira um e-mail válido / `;
-
     }
-
-    // CONFIRMAÇÃO EMAIL
 
     if (emailVar.length > 0) {
-
       if (confEmail.length == 0) {
-
         erros += `Confirme o seu e-mail / `;
-
       } else if (confEmail != emailVar) {
-
         erros += `O e-mail de confirmação não coincide / `;
-
       }
-
     }
-
-    // VALIDAÇÃO SENHA
 
     if (senhaVar.length == 0) {
       erros += `Escolha sua senha / `;
     }
 
-    // CONFIRMAÇÃO SENHA
-
     if (senhaVar.length > 0) {
-
       if (confirmacaoSenhaVar.length == 0) {
-
         erros += `Confirme sua senha / `;
-
       } else if (confirmacaoSenhaVar != senhaVar) {
-
         erros += `A confirmação de senha está diferente / `;
-
       }
-
     }
-
-    // CNPJ EMPRESA
 
     if (codigoVar == '') {
       erros += `Informe o CNPJ da empresa / `;
     }
 
-    // VERIFICA CAMPOS
-
     if (erros != '') {
-
       cardErro.style.display = "block";
-
       mensagem_erro.innerHTML = erros;
-
       setTimeout(sumirMensagem, 5000);
-
       return false;
-
     }
-
-    // VERIFICA EMPRESA PELO CNPJ
 
     let codigoValido = false;
-
     console.log(listaEmpresasCadastradas);
-
     for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-
       if (listaEmpresasCadastradas[i].cnpj == codigoVar) {
-
         idEmpresaVincular = listaEmpresasCadastradas[i].idEmpresa;
-
         codigoValido = true;
-
         break;
-
       }
-
     }
-
-    // CNPJ NÃO ENCONTRADO
 
     if (!codigoValido) {
-
       cardErro.style.display = "block";
-
       mensagem_erro.innerHTML = "CNPJ da empresa inválido";
-
       setTimeout(sumirMensagem, 5000);
-
-      return false;
-
+      return false
     }
-
-    // FETCH CADASTRO
-
     fetch("/usuarios/cadastrar", {
-
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },
 
       body: JSON.stringify({
-
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
         idEmpresaVincularServer: idEmpresaVincular
-
       }),
-
     })
 
       .then(function (resposta) {
-
         console.log("resposta: ", resposta);
-
         if (resposta.ok) {
-
           msgSucessoNoCadastro.innerHTML = `
             <p class="msg-sucesso-cadastro">
               <span>
@@ -334,109 +257,69 @@
               </span>
             </p>
           `;
-
           setTimeout(() => {
             window.location = "login.html";
           }, 2000);
-
           limparFormulario();
-
           finalizarAguardar();
-
         } else {
-
           resposta.text().then(texto => {
-
             cardErro.style.display = "block";
-
             mensagem_erro.innerHTML = texto;
-
           });
-
           throw "Houve um erro ao tentar realizar o cadastro!";
-
         }
-
       })
-
       .catch(function (erro) {
-
         console.log(`#ERRO: ${erro}`);
-
         finalizarAguardar();
-
       });
-
     return false;
-
   }
 
   function validarSenha() {
-
     let senha = ipt_senha.value;
 
     if (senha == '') {
-
       msgSenha.innerHTML = '';
-
       return;
-
     }
 
     if (senha.length < 6) {
-
       msgSenha.innerHTML = 'Senha fraca (mínimo 6 caracteres)';
-
     } else if (senha.length >= 6 && senha.length < 10) {
-
       msgSenha.innerHTML = 'Senha média';
-
     } else {
-
       msgSenha.innerHTML = 'Senha forte ✅';
-
     }
-
   }
 
   function listar() {
-
     fetch("/empresas/listar", {
       method: "GET",
     })
 
       .then(function (resposta) {
-
         if (!resposta.ok) {
           throw new Error("Erro ao listar empresas");
         }
-
         return resposta.json();
-
       })
 
       .then((empresas) => {
-
         console.log(empresas);
-
         empresas.forEach((empresa) => {
           listaEmpresasCadastradas.push(empresa);
         });
-
       })
 
       .catch(function (erro) {
-
         console.log(`#ERRO: ${erro}`);
-
       });
-
   }
 
   function sumirMensagem() {
-
     cardErro.style.display = "none";
-
   }
 
 </script>
