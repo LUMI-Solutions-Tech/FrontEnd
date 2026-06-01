@@ -79,7 +79,7 @@
     let tentativas = 3;
 
     function entrar() {
-        aguardar();
+        // aguardar();
         let emailVar = ipt_email.value.trim();
         let senhaVar = ipt_senha.value.trim();
         let erros = '';
@@ -125,7 +125,7 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idUsuario;
-                    sessionStorage.FK_EMPRESA = json.fkUsuarioEmpresa;
+                    sessionStorage.FK_EMPRESA = json.fkEmpresa;
                     alert(`Login efetuado com sucesso!`);
                     setTimeout(function () {
                         window.location = "./dashboard/dashboard.html";
@@ -142,7 +142,7 @@
                 }
                 resposta.text().then(texto => {
                     console.error(texto);
-                    finalizarAguardar(texto);
+                    // finalizarAguardar(texto);
                 });
             }
         })
