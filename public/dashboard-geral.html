@@ -23,7 +23,7 @@
                 <p class="nome-logo">Lumi Solutions Tech</p>
             </div>
 
-            <div class="menu_dash">             
+            <div class="menu_dash">
                 <a href="./index.html" class="opcoes-menu login" class="opcoes-menu">Sair</a>
             </div>
         </div>
@@ -48,25 +48,25 @@
         <div class="grid-4">
             <button style="border: none;" onclick="estufa_01()">
                 <div class="card laranja">
-                    <small>Estufa A</small><b>13.8 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa A</small><b id="dli-value">13.8 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_02()">
                 <div class="card verde">
-                    <small>Estufa B</small><b>15.2 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa B</small><b id="dli-value">15.2 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_03()">
                 <div class="card verde">
-                    <small>Estufa C</small><b>17.9 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa C</small><b id="dli-value">17.9 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_04()">
                 <div class="card verde">
-                    <small>Estufa D</small><b>19.1 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa D</small><b id="dli-value">19.1 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
@@ -163,6 +163,68 @@
         }
         function estufa_04() {
             window.location.href = "dashboard.html";
+        }
+
+        function LuminosidadeSensores() {
+            var dadosSensor = document.getElementById('card-lumi').value;
+
+            fetch(`/medidas/sensor/${dadosSensor}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        var dados = resposta[0];
+
+                        document.getElementById('dli-value').innerText = dados.dli;
+                        document.getElementById('ppfd-value').innerText = dados.ppfd;
+
+                        plotarGrafico(dados);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
+        let graficoAtual;
+
+        function plotarGrafico(dados) {
+            console.log("Iniciando a plotagem do gráfico com os dados:", dados);
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            if (graficoAtual) {
+                graficoAtual.destroy();
+            }
+
+            graficoAtual = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Pontos', 'Assistências', 'Rebotes', 'Aproveitamento %'],
+                    datasets: [
+                        {
+                            label: 'Michael Jordan',
+                            data: [dados.pontos_mj, dados.assistencias_mj, dados.rebotes_mj, dados.aproveitamento_mj],
+                            backgroundColor: 'white',
+                            borderWidth: 1
+                        },
+                        {
+                            label: dados.rival_nome || 'Rival',
+                            data: [dados.pontos_rival, dados.assistencias_rival, dados.rebotes_rival, dados.aproveitamento_rival],
+                            backgroundColor: '#333',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
