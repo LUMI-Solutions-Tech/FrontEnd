@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Lumi Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="estilosCss/style-dashboard.css">
+</head>
+
+<body>
+
+    <header id="home">
+        <div class="cabecalho-menu">
+            <div class="logo-container">
+                <img src="imagens/icons/logo.svg" alt="Logo Lumi Solutions" class="img-logo">
+                <p class="nome-logo">Lumi Solutions Tech</p>
+            </div>
+
+            <div class="menu_dash">             
+                <a href="./index.html" class="opcoes-menu login" class="opcoes-menu">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div class="topo">
+            <div>
+                <h2>Dashboard — Visão Geral</h2>
+                <p>Verde Vida Ltda · Sensor LED Full Spectrum</p>
+            </div>
+        </div>
+
+        <div class="alerta">
+            <div> <b>Central de Ação - Estufa A</b> — Luminosidade abaixo do nível crítico para fotossíntese. Considere
+                ligar as
+                lâmpadas de suplementação.</div>
+            <button class="btn-laranja" onclick="estufa_01()">⚠ AÇÃO REQUERIDA</button>
+        </div>
+
+        <div class="grid-4">
+            <button style="border: none;" onclick="estufa_01()">
+                <div class="card laranja">
+                    <small>Estufa A</small><b>13.8 <span>mol/m²/d</span></b><small>Ideal:
+                        15-20 mol/m²/d</small>
+                </div>
+            </button>
+            <button style="border: none;" onclick="estufa_02()">
+                <div class="card verde">
+                    <small>Estufa B</small><b>15.2 <span>mol/m²/d</span></b><small>Ideal:
+                        15-20 mol/m²/d</small>
+                </div>
+            </button>
+            <button style="border: none;" onclick="estufa_03()">
+                <div class="card verde">
+                    <small>Estufa C</small><b>17.9 <span>mol/m²/d</span></b><small>Ideal:
+                        15-20 mol/m²/d</small>
+                </div>
+            </button>
+            <button style="border: none;" onclick="estufa_04()">
+                <div class="card verde">
+                    <small>Estufa D</small><b>19.1 <span>mol/m²/d</span></b><small>Ideal:
+                        15-20 mol/m²/d</small>
+                </div>
+            </button>
+
+
+            <div class="card branco">
+                <div class="linha-entre">
+                    <b>DLI por Dia — Últimos 7 Dias</b>
+                    <div><span class="badge verde">● Com LED</span> <span class="badge amarelo">● Meta</span></div>
+                </div>
+                <canvas id="chart_dli"></canvas>
+            </div>
+
+            <div class="card branco">
+                <b>Resumo da Semana</b>
+                <div class="resumo-linha">
+                    <div><small>Estufa D</small>
+                        <p>Quarta-feira</p>
+                    </div>
+                    <div><b class="vermelho-txt">26.8</b> <span class="badge vermelho">pico</span></div>
+                </div>
+                <div class="resumo-linha">
+                    <div><small>Estufa A</small>
+                        <p>Domingo</p>
+                    </div>
+                    <div><b class="laranja-txt">11.3</b> <span class="badge laranja">baixo</span></div>
+                </div>
+                <div class="resumo-linha sem-borda">
+                    <div>
+                        <small>Média das Estufas</small>
+                        <p>> 16.8 mol/m²/dia</p>
+                    </div>
+                    <div><b style="color:#999">5/7</b> <span class="badge cinza">dias</span></div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <script>
+        //  DLI por Dia 
+        new Chart(document.getElementById('chart_dli'), {
+            type: 'bar',
+            data: {
+                // Dias da semana exibidos no eixo X
+                labels: ['Estufa A', 'Estufa B', 'Estufa C', 'Estufa D'],
+                datasets: [{
+                    label: 'DLI',
+                    // Valores de DLI dia da semana
+                    data: [13.8, 15.2, 17.9, 19.1],
+                    backgroundColor: ['#FA8016', '#57AF32', '#57AF32', '#57AF32'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+                },
+                scales: {
+                    y: { max: 20 },            // Limite máximo do eixo Y 
+                    x: { grid: { display: false } } // Remove as linhas de grade
+                }
+            },
+            plugins: [{
+                id: 'linhaMeta',
+
+                // Executado após o desenho do gráfico, para sobrepor a linha de meta
+                afterDraw(grafico) {
+                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+
+                    // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
+                    const posicaoMetaY = eixoY.getPixelForValue(15);
+
+                    // Configura o estilo da linha tracejada amarela
+                    contexto.strokeStyle = '#EDD011';
+                    // Desenha a linha horizontal da meta de ponta a ponta no gráfico
+                    contexto.moveTo(eixoX.left, posicaoMetaY);
+                    contexto.lineTo(eixoX.right, posicaoMetaY);
+                    contexto.stroke();
+
+                }
+            }]
+        });
+
+        function estufa_01() {
+            window.location.href = "dashboard.html";
+        }
+        function estufa_02() {
+            window.location.href = "dashboard.html";
+        }
+        function estufa_03() {
+            window.location.href = "dashboard.html";
+        }
+        function estufa_04() {
+            window.location.href = "dashboard.html";
+        }
+    </script>
+</body>
+
+</html>

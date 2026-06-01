@@ -304,14 +304,14 @@ body {
 
 
 /*Parte do joao */
-.rodape{
+.rodape {
     display: flex;
     justify-content: space-around;
     align-items: center;
 
 }
 
-.link-rodape{
+.link-rodape {
     display: flex;
     gap: 50px;
     /* flex-direction: column; */
@@ -329,35 +329,43 @@ body {
     font-weight: 600;
 }
 
-.informacoes{
-    display:flex;
+.informacoes {
+    display: flex;
     flex-wrap: wrap;
     gap: 20px;
     width: 30%;
 }
 
-.img-mapa{
+.img-mapa {
     width: 100%;
 }
 
-.icones-informacoes{
+.icones-informacoes {
     width: 45%;
 }
 
-.img-informacoes{
+.img-informacoes {
     width: 15%;
 }
-.titulo-informacoes{
+
+.titulo-informacoes {
     font-size: 16px;
     margin-bottom: 0;
 }
-.texto-informacoes{
+
+.texto-informacoes {
     font-size: 12px;
     color: #525560;
     margin: 0;
 }
-.direitos{
-    font-size:10px;
+
+#link_github {
+    color: black;
+    text-decoration: none;
+}
+
+.direitos {
+    font-size: 10px;
     text-align: center;
     display: flex;
     justify-content: center;
