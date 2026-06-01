@@ -30,11 +30,16 @@ body {
   font-weight: 600;
 }
 
-.menu {
+
+
+.menu_dash{
+
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 20px;
   width: 45%;
+
 }
 
 .opcoes-menu {
