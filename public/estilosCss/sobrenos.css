@@ -101,6 +101,7 @@
 /* Sobre nós - Mickaela*/
 
 .tituloImpactos {
+    margin-top: 20px;
     height: 20dvh;
     color: #023F3A;
     font-size: 40px;
@@ -316,10 +317,8 @@
 .hero-sobrenos {
     position: relative;
     width: 90%;
-    margin-right: 120px;
-    margin-left: 120px;
-    margin-top: 30px;
-    margin-bottom: -30px;
+    margin: auto;
+    margin-top: 20px;
     border-radius: 16px;
     overflow: hidden;
     height: 350px;
