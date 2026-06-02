@@ -316,13 +316,13 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-
+    padding: 1rem 2rem;
 }
 
 .link-rodape{
     display: flex;
     gap: 50px;
-    /* flex-direction: column; */
+    width: 40%;
 }
 
 .opcoes-rodape {
@@ -341,11 +341,16 @@ body {
     display:flex;
     flex-wrap: wrap;
     gap: 20px;
+    width: 35%;
+}
+
+.rodape-mapa {
     width: 30%;
 }
 
-.img-mapa{
-    width: 100%;
+.img-mapa {
+    width: 80%;
+    border-radius: 10px;
 }
 
 .icones-informacoes{
@@ -355,17 +360,29 @@ body {
 .img-informacoes{
     width: 15%;
 }
+
 .titulo-informacoes{
-    font-size: 16px;
+    font-size: 1rem;
     margin-bottom: 0;
 }
+
 .texto-informacoes{
-    font-size: 12px;
+    font-size: .7rem;
     color: #525560;
     margin: 0;
 }
+
+#link_github {
+    color: #525560;
+    text-decoration: none;
+}
+
+#link_github:hover {
+    color: #202021;
+    font-weight: 500;
+}
 .direitos{
-    font-size:10px;
+    font-size: .9rem;
     text-align: center;
     display: flex;
     justify-content: center;
