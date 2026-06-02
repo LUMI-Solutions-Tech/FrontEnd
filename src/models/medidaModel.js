@@ -3,7 +3,8 @@ var database = require("../database/config");
 function buscarDadosSensor(id) {
     var instrucaoSql = `
         SELECT 
-            ppfd
+            ppfd,
+            dli
         FROM leituras
         WHERE fkSensor = '${id}'
         ORDER BY dataHora DESC
@@ -14,12 +15,6 @@ function buscarDadosSensor(id) {
     return database.executar(instrucaoSql);
 }
 
-// function listarTemporadas() {
-//     var instrucaoSql = `SELECT ano FROM temporada;`;
-//     return database.executar(instrucaoSql);
-// }
-
 module.exports = {
     buscarDadosSensor
-   // listarTemporadas
 };

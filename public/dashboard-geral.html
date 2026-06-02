@@ -74,12 +74,12 @@
 
             <div class="card branco">
                 <div class="linha-entre">
-                    <b>DLI por Dia — Últimos 7 Dias</b>
+                    <b>ppfd Atual — Última hora</b>
                     <div><span class="badge verde">● Com LED</span> <span class="badge amarelo">● Meta</span></div>
                 </div>
                 <canvas id="chart_dli"></canvas>
             </div>
-
+<!-- falta fazer routes, model, controler main.js -->
             <div class="card branco">
                 <b>Resumo da Semana</b>
                 <div class="resumo-linha">
@@ -114,7 +114,6 @@
         function estufa_03() { window.location.href = "dashboard.html"; }
         function estufa_04() { window.location.href = "dashboard.html"; }
 
-        // VARIÁVEIS GLOBAIS
         let valorSensor = [0, 0, 0, 0];
         let graficoAtual = null;
 
@@ -125,8 +124,8 @@
                         console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
                         var dados = resposta[0];
 
-                        // Atualiza os indicadores (cards) na tela
-                        document.getElementById(`dli-value-s${idSensor}`).innerText = dados.ppfd;
+                        // Atualiza os indicadores na tela
+                        document.getElementById(`dli-value-s${idSensor}`).innerText = dados.dli;
 
                         // Atualiza o gráfico com o novo dado
                         plotarGrafico(idSensor, dados);
@@ -148,7 +147,7 @@
             // Guarda o dado recebido na posição correta do array global
             valorSensor[idSensor - 1] = dados.ppfd;
 
-            // Se o gráfico já foi criado, apenas altera os dados existentes e atualiza a tela
+            
             if (graficoAtual) {
                 graficoAtual.data.datasets[0].data = [
                     valorSensor[0],
@@ -160,7 +159,6 @@
                 return;
             }
 
-            // Se o gráfico não existe (primeiro carregamento), cria ele do zero
             const canvaGrafico = document.getElementById('chart_dli');
 
             graficoAtual = new Chart(canvaGrafico, {
@@ -184,7 +182,7 @@
                         legend: { display: false }
                     },
                     scales: {
-                        y: { max: 20 },
+                        y: { max: 600 },
                         x: { grid: { display: false } }
                     }
                 },
@@ -192,7 +190,7 @@
                     id: 'linhaMeta',
                     afterDraw(grafico) {
                         const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
-                        const posicaoMetaY = eixoY.getPixelForValue(15);
+                        const posicaoMetaY = eixoY.getPixelForValue(250);
 
                         contexto.beginPath();
                         contexto.strokeStyle = '#EDD011';
@@ -205,8 +203,7 @@
             });
         }
 
-        // CORREÇÃO: Colocada a inicialização do lado de fora das outras funções
-        window.onload = function () {
+            window.onload = function () {
             console.log("Página carregada com sucesso!");
             DliSensor(1);
             DliSensor(2);
