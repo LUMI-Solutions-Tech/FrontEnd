@@ -108,29 +108,28 @@
     </main>
 
     <script>
-        //  DLI por Dia 
-        function estufa_01() {
-            window.location.href = "dashboard.html";
-        }
-        function estufa_02() {
-            window.location.href = "dashboard.html";
-        }
-        function estufa_03() {
-            window.location.href = "dashboard.html";
-        }
-        function estufa_04() {
-            window.location.href = "dashboard.html";
-        }
+        // DLI por Dia 
+        function estufa_01() { window.location.href = "dashboard.html"; }
+        function estufa_02() { window.location.href = "dashboard.html"; }
+        function estufa_03() { window.location.href = "dashboard.html"; }
+        function estufa_04() { window.location.href = "dashboard.html"; }
+
+        // VARIÁVEIS GLOBAIS
+        let valorSensor = [0, 0, 0, 0];
+        let graficoAtual = null;
 
         function DliSensor(idSensor) {
             fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
                         var dados = resposta[0];
 
+                        // Atualiza os indicadores (cards) na tela
                         document.getElementById(`dli-value-s${idSensor}`).innerText = dados.ppfd;
-                        plotarGrafico(dados);
+
+                        // Atualiza o gráfico com o novo dado
+                        plotarGrafico(idSensor, dados);
 
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
@@ -141,116 +140,79 @@
                 .catch(function (error) {
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-
         }
-        let graficoAtual = null;
 
-        function plotarGrafico(dados) {
+        function plotarGrafico(idSensor, dados) {
             console.log("Iniciando a plotagem do gráfico com os dados:", dados);
-            if(graficoAtual){
-                graficoAtual.destroy();
+
+            // Guarda o dado recebido na posição correta do array global
+            valorSensor[idSensor - 1] = dados.ppfd;
+
+            // Se o gráfico já foi criado, apenas altera os dados existentes e atualiza a tela
+            if (graficoAtual) {
+                graficoAtual.data.datasets[0].data = [
+                    valorSensor[0],
+                    valorSensor[1],
+                    valorSensor[2],
+                    valorSensor[3]
+                ];
+                graficoAtual.update();
+                return;
             }
 
+            // Se o gráfico não existe (primeiro carregamento), cria ele do zero
             const canvaGrafico = document.getElementById('chart_dli');
 
             graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
-                    // Sensores exibidos no eixo X
                     labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
                     datasets: [{
                         label: 'DLI Atual',
-                        // Valores de DLI dia da semana
-                        data: [dados.ppfd, dados.ppfd, dados.ppfd, dados.ppfd],
+                        data: [
+                            valorSensor[0],
+                            valorSensor[1],
+                            valorSensor[2],
+                            valorSensor[3]
+                        ],
                         backgroundColor: ['#FA8016', '#57AF32', '#57AF32', '#57AF32'],
                         borderRadius: 6
                     }]
                 },
                 options: {
                     plugins: {
-                        legend: { display: false } // Oculta a legenda padrão do Chart.js
+                        legend: { display: false }
                     },
                     scales: {
-                        y: { max: 20 },            // Limite máximo do eixo Y 
-                        x: { grid: { display: false } } // Remove as linhas de grade
+                        y: { max: 20 },
+                        x: { grid: { display: false } }
                     }
                 },
                 plugins: [{
                     id: 'linhaMeta',
-
-                    // Executado após o desenho do gráfico, para sobrepor a linha de meta
                     afterDraw(grafico) {
                         const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
-
-                        // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
                         const posicaoMetaY = eixoY.getPixelForValue(15);
 
                         contexto.beginPath();
-                        // Configura o estilo da linha tracejada amarela
                         contexto.strokeStyle = '#EDD011';
-                        // Desenha a linha horizontal da meta de ponta a ponta no gráfico
                         contexto.moveTo(eixoX.left, posicaoMetaY);
                         contexto.lineTo(eixoX.right, posicaoMetaY);
                         contexto.stroke();
                         contexto.closePath();
-
                     }
                 }]
-            })
-            setTimeout(() => atualizarGrafico(dados, chart_dli), 5000);
-        };
+            });
+        }
 
-
+        // CORREÇÃO: Colocada a inicialização do lado de fora das outras funções
         window.onload = function () {
             console.log("Página carregada com sucesso!");
-            DliSensor(1),
-                DliSensor(2),
-                DliSensor(3),
-                DliSensor(4);
+            DliSensor(1);
+            DliSensor(2);
+            DliSensor(3);
+            DliSensor(4);
         };
-
-        function atualizarGrafico(idSensor, dados, myChart) {
-            fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
-                if (response.ok) {
-                    response.json().then(function (novoRegistro) {
-
-                        obterdados(idSensor);
-                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                        console.log(`Dados atuais do gráfico:`);
-                        console.log(dados);
-
-                        if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                            console.log("---------------------------------------------------------------")
-                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                            avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                            console.log("Horário do novo dado capturado:")
-                            console.log(novoRegistro[0].momento_grafico)
-                            console.log("Horário do último dado capturado:")
-                            console.log(dados.labels[dados.labels.length - 1])
-                            console.log("---------------------------------------------------------------")
-                        } else {
-                            // tirando e colocando valores no gráfico
-                            dados.labels.shift(); // apagar o primeiro
-                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-                            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                            dados.datasets[0].data.push(novoRegistro[0].ppfd); // incluir uma nova medida de umidade
-                            myChart.update();
-                        }
-                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                        proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
-                    });
-                } else {
-                    console.error('Nenhum dado encontrado ou erro na API');
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
-                }
-            })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
-
-        }
     </script>
 </body>
 
