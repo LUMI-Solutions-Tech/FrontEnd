@@ -48,25 +48,25 @@
         <div class="grid-4">
             <button style="border: none;" onclick="estufa_01()">
                 <div class="card laranja">
-                    <small>Estufa A</small><b id="dli-value-s1">13.8 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa A</small><b id="dli-value-s1">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_02()">
                 <div class="card verde">
-                    <small>Estufa B</small><b id="dli-value-s2">15.2 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa B</small><b id="dli-value-s2">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_03()">
                 <div class="card verde">
-                    <small>Estufa C</small><b id="dli-value-s3">17.9 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa C</small><b id="dli-value-s3">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
             <button style="border: none;" onclick="estufa_04()">
                 <div class="card verde">
-                    <small>Estufa D</small><b id="dli-value-s4">19.1 <span>mol/m²/d</span></b><small>Ideal:
+                    <small>Estufa D</small><b id="dli-value-s4">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
@@ -109,49 +109,6 @@
 
     <script>
         //  DLI por Dia 
-        new Chart(document.getElementById('chart_dli'), {
-            type: 'bar',
-            data: {
-                // Dias da semana exibidos no eixo X
-                labels: ['Estufa A', 'Estufa B', 'Estufa C', 'Estufa D'],
-                datasets: [{
-                    label: 'DLI',
-                    // Valores de DLI dia da semana
-                    data: [13.8, 15.2, 17.9, 19.1],
-                    backgroundColor: ['#FA8016', '#57AF32', '#57AF32', '#57AF32'],
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { display: false } // Oculta a legenda padrão do Chart.js
-                },
-                scales: {
-                    y: { max: 20 },            // Limite máximo do eixo Y 
-                    x: { grid: { display: false } } // Remove as linhas de grade
-                }
-            },
-            plugins: [{
-                id: 'linhaMeta',
-
-                // Executado após o desenho do gráfico, para sobrepor a linha de meta
-                afterDraw(grafico) {
-                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
-
-                    // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
-                    const posicaoMetaY = eixoY.getPixelForValue(15);
-
-                    // Configura o estilo da linha tracejada amarela
-                    contexto.strokeStyle = '#EDD011';
-                    // Desenha a linha horizontal da meta de ponta a ponta no gráfico
-                    contexto.moveTo(eixoX.left, posicaoMetaY);
-                    contexto.lineTo(eixoX.right, posicaoMetaY);
-                    contexto.stroke();
-
-                }
-            }]
-        });
-
         function estufa_01() {
             window.location.href = "dashboard.html";
         }
@@ -173,7 +130,7 @@
                         var dados = resposta[0];
 
                         document.getElementById(`dli-value-s${idSensor}`).innerText = dados.ppfd;
-                        // plotarGrafico(dados);
+                        plotarGrafico(dados);
 
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
@@ -184,99 +141,116 @@
                 .catch(function (error) {
                     console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-                
+
         }
-        let graficoAtual;
+        let graficoAtual = null;
 
-        function plotarGrafico(idSensor, dados) {
+        function plotarGrafico(dados) {
             console.log("Iniciando a plotagem do gráfico com os dados:", dados);
-
-            const ctx = document.getElementById('myChart').getContext('2d');
-            if (graficoAtual) {
+            if(graficoAtual){
                 graficoAtual.destroy();
             }
 
-            graficoAtual = new Chart(ctx, {
+            const canvaGrafico = document.getElementById('chart_dli');
+
+            graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
+                    // Sensores exibidos no eixo X
                     labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
-                    datasets: [
-                        {
-                            label: 'ppfd',
-                            data: [dados.ppfd, dados.dli_s2, dados.dli_s3, dados.dli_s4],
-                            backgroundColor: 'white',
-                            borderWidth: 1
-                        },
-                    ]
+                    datasets: [{
+                        label: 'DLI Atual',
+                        // Valores de DLI dia da semana
+                        data: [dados.ppfd, dados.ppfd, dados.ppfd, dados.ppfd],
+                        backgroundColor: ['#FA8016', '#57AF32', '#57AF32', '#57AF32'],
+                        borderRadius: 6
+                    }]
                 },
                 options: {
-                    responsive: true,
+                    plugins: {
+                        legend: { display: false } // Oculta a legenda padrão do Chart.js
+                    },
                     scales: {
-                        y: {
-                            beginAtZero: true
-                        }
+                        y: { max: 20 },            // Limite máximo do eixo Y 
+                        x: { grid: { display: false } } // Remove as linhas de grade
                     }
-                }
-            });
+                },
+                plugins: [{
+                    id: 'linhaMeta',
 
-            setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
-        }
+                    // Executado após o desenho do gráfico, para sobrepor a linha de meta
+                    afterDraw(grafico) {
+                        const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
 
-        window.onload = function(){
-            console.log("Página carregada com sucesso!");
-            DliSensor(1),
-            DliSensor(2),
-            DliSensor(3),
-            DliSensor(4); 
+                        // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
+                        const posicaoMetaY = eixoY.getPixelForValue(15);
+
+                        contexto.beginPath();
+                        // Configura o estilo da linha tracejada amarela
+                        contexto.strokeStyle = '#EDD011';
+                        // Desenha a linha horizontal da meta de ponta a ponta no gráfico
+                        contexto.moveTo(eixoX.left, posicaoMetaY);
+                        contexto.lineTo(eixoX.right, posicaoMetaY);
+                        contexto.stroke();
+                        contexto.closePath();
+
+                    }
+                }]
+            })
+            setTimeout(() => atualizarGrafico(dados, chart_dli), 5000);
         };
 
-         function atualizarGrafico(idSensor, dados, myChart) {
-        fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
 
-                    obterdados(idSensor);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
+        window.onload = function () {
+            console.log("Página carregada com sucesso!");
+            DliSensor(1),
+                DliSensor(2),
+                DliSensor(3),
+                DliSensor(4);
+        };
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idSensor}`)
-                    avisoCaptura.innerHTML = ""
+        function atualizarGrafico(idSensor, dados, myChart) {
+            fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (novoRegistro) {
 
+                        obterdados(idSensor);
+                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                        console.log(`Dados atuais do gráfico:`);
+                        console.log(dados);
 
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
-                    } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+                        if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
+                            console.log("---------------------------------------------------------------")
+                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                            avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                            console.log("Horário do novo dado capturado:")
+                            console.log(novoRegistro[0].momento_grafico)
+                            console.log("Horário do último dado capturado:")
+                            console.log(dados.labels[dados.labels.length - 1])
+                            console.log("---------------------------------------------------------------")
+                        } else {
+                            // tirando e colocando valores no gráfico
+                            dados.labels.shift(); // apagar o primeiro
+                            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].ppfd); // incluir uma nova medida de umidade
-                        myChart.update();
-                    }
-
+                            dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                            dados.datasets[0].data.push(novoRegistro[0].ppfd); // incluir uma nova medida de umidade
+                            myChart.update();
+                        }
+                        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                        proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
                     proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idSensor, dados, myChart), 2000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
-    }
+        }
     </script>
 </body>
 
