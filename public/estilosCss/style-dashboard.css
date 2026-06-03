@@ -10,7 +10,9 @@ body {
 
 .cabecalho-menu {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-left: 3vw;
+  margin-right: 3vw;
   align-items: center;
   padding: 6px 12px;
 }

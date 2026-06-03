@@ -21,10 +21,24 @@ body {
     width: 100%;
     height: 15dvh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 15vw;
+
 }
+
+#tituloPrincipalCalculadora {
+
+    display: flex;
+    flex-direction: column;
+    width: 50dvw;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20dvw;
+}
+
+
 
 .tituloCalculadora h2 {
     font-size: 30px;
@@ -70,7 +84,7 @@ input {
     border-radius: 5px;
     background-color: #F8FAF8;
     border: 2px solid #B4D2B4;
-    padding-left: 6px ;
+    padding-left: 6px;
 }
 
 input::placeholder {
@@ -161,7 +175,7 @@ input::placeholder {
     transition: 500ms;
 }
 
-.cardSobreCalculadora{
+.cardSobreCalculadora {
     background-color: #02501e;
     height: 3dvh;
     width: 55%;
