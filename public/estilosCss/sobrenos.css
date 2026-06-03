@@ -101,7 +101,7 @@
 /* Sobre nós - Mickaela*/
 
 .tituloImpactos {
-    margin-top: 20px;
+    margin-top: 35px;
     height: 20dvh;
     color: #023F3A;
     font-size: 40px;
@@ -128,7 +128,7 @@
 }
 
 .itemPrimeiraImagemImpactos {
-    height: 80%;
+    height: 90%;
     width: 25%;
     background-image: url('../assets/sobre-nós/imagemMonitoramentointeligente.png');
     background-repeat: no-repeat;
@@ -139,7 +139,7 @@
 
 
 .itemSegundaImagemImpactos {
-    height: 80%;
+    height: 90%;
     width: 25%;
     background-image: url('../assets/sobre-nós/imagemQualidadeCultivo.png');
     background-repeat: no-repeat;
@@ -150,7 +150,7 @@
 
 
 .itemTerceiraImagemImpactos {
-    height: 80%;
+    height: 90%;
     width: 25%;
     background-image: url('../assets/sobre-nós/dadosimpacto.webp');
     background-repeat: no-repeat;
@@ -159,11 +159,19 @@
     background-position: center;
 }
 
+
+.itemPrimeiraImagemImpactos:hover,
+.itemSegundaImagemImpactos:hover,
+.itemTerceiraImagemImpactos:hover {
+    transform: translateY(-6px); 
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.30); 
+}
+
 .textoimagemimpactos {
     color: #ffffff;
     border-radius: 5%;
     width: 89%;
-    height: 12%;
+    height: 22%;
     gap: 3px;
     margin-top: 70%;
     margin-bottom: 45px;
@@ -171,7 +179,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 20px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.541), rgba(255, 255, 255, 0.049));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.286), rgba(7, 2, 2, 0.144));
 }
 
 .titulodaImagemImpactos {
