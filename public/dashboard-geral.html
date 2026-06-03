@@ -109,14 +109,15 @@
 
     <script>
         // DLI por Dia 
-        function estufa_01() { window.location.href = "dashboard.html"; }
+        function estufa_01() { window.location.href = "dashboard.html"; } // ao clicar no botão do sensor redireciona para a aba de dash detalhada do sensor
         function estufa_02() { window.location.href = "dashboard.html"; }
         function estufa_03() { window.location.href = "dashboard.html"; }
         function estufa_04() { window.location.href = "dashboard.html"; }
 
-        let valorSensor = [0, 0, 0, 0];
-        let graficoAtual = null;
+        let valorSensor = [0, 0, 0, 0]; // cria um vetor com valores em 0 que posteriormente será utilizado na plotagem do gráfico
+        let graficoAtual = null; // declara que o gráfico atual é null 
 
+        // função de captação de dados do banco
         function DliSensor(idSensor) {
             fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
@@ -130,6 +131,7 @@
                         // Atualiza o gráfico com o novo dado
                         plotarGrafico(idSensor, dados);
 
+                        // intervalo de 5 segundos para a proxima requisição no banco 
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
                 } else {
@@ -141,13 +143,14 @@
                 });
         }
 
+        // função de plotagem dos dados no gráfico
         function plotarGrafico(idSensor, dados) {
             console.log("Iniciando a plotagem do gráfico com os dados:", dados);
 
-            // Guarda o dado recebido na posição correta do array global
+            // pega a lista declarada na linha #117 e guarda o dado recebido na posição correta do array global
             valorSensor[idSensor - 1] = dados.ppfd;
 
-            
+            // if que se o grafico atual existir ele atualiza o grafico com os novos valores
             if (graficoAtual) {
                 graficoAtual.data.datasets[0].data = [
                     valorSensor[0],
@@ -159,21 +162,23 @@
                 return;
             }
 
+            // variavel para criação do grafico
             const canvaGrafico = document.getElementById('chart_dli');
 
+            // plotagem do gráfico, utilizando a variavel de criação do grafico
             graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
-                    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
+                    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'], // declara os produtos do grafico no eixo x
                     datasets: [{
                         label: 'DLI Atual',
                         data: [
                             valorSensor[0],
                             valorSensor[1],
                             valorSensor[2],
-                            valorSensor[3]
+                            valorSensor[3] // utiliza a variavel já com valores separados anteriormente para plotar em cada um dos produtos do gráfico em ordem
                         ],
-                        backgroundColor: ['#FA8016', '#57AF32', '#57AF32', '#57AF32'],
+                        backgroundColor: ['#57AF32', '#57AF32', '#57AF32', '#57AF32'],
                         borderRadius: 6
                     }]
                 },
@@ -182,7 +187,7 @@
                         legend: { display: false }
                     },
                     scales: {
-                        y: { max: 600 },
+                        y: { max: 600 }, // o gráfico no eixo y vai até 600
                         x: { grid: { display: false } }
                     }
                 },
@@ -190,7 +195,7 @@
                     id: 'linhaMeta',
                     afterDraw(grafico) {
                         const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
-                        const posicaoMetaY = eixoY.getPixelForValue(250);
+                        const posicaoMetaY = eixoY.getPixelForValue(250); // parte que mostra a uma linha de ideal no 250
 
                         contexto.beginPath();
                         contexto.strokeStyle = '#EDD011';
@@ -203,6 +208,7 @@
             });
         }
 
+        // função que após o carregamento da pagina puxa a função de DliSensor puxando o id de cada Sensor
             window.onload = function () {
             console.log("Página carregada com sucesso!");
             DliSensor(1);

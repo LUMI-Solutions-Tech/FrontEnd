@@ -25,8 +25,8 @@
 
             <div class="menu_dash">
                 <a href="./index.html" class="opcoes-menu login" class="opcoes-menu">Sair</a>
-            </div>               
             </div>
+        </div>
         </div>
     </header>
 
@@ -48,10 +48,11 @@
 
         <div class="grid-4">
             <div class="card laranja">
-                <small>Média da Última Hora - Estufa A</small><b>180 <span>ppfd</span></b><small>Ideal:
+                <small>Média da Última Hora - Estufa A</small><b id="ppfd-value-s1">180
+                    <span>ppfd</span></b><small>Ideal:
                     200-400 ppfd</small>
             </div>
-            <div class="card verde-claro"><small>DLI Acumulado Hoje - Estufa A</small><b>12.5
+            <div class="card verde-claro"><small>DLI Acumulado Hoje - Estufa A</small><b id="dli-value-s1">12.5
                     <span>mol/m²/d</span></b><small>Fotossíntese ativa</small></div>
         </div>
 
@@ -71,7 +72,7 @@
             </div>
 
             <div class="coluna2">
-                
+
                 <div class="card branco">
                     <div class="linha-entre">
                         <b>Histórico de Luminosidade — Últimas 24 horas - Estufa A</b>
@@ -109,117 +110,96 @@
         </div>
     </main>
     <script>
-        //  DLI por Dia 
-        new Chart(document.getElementById('chart_dli'), {
-            type: 'bar',
-            data: {
-                // Dias da semana exibidos no eixo X
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                datasets: [{
-                    label: 'DLI',
-                    // Valores de DLI dia da semana
-                    data: [16.8, 17.2, 17.5, 17.0, 11.3, 11.8, 11.5],
-                    backgroundColor: ['#57AF32', '#57AF32', '#57AF32', '#57AF32', '#FA8016', '#FA8016', '#FA8016'],
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { display: false } // Oculta a legenda padrão do Chart.js
-                },
-                scales: {
-                    y: { max: 20 },            // Limite máximo do eixo Y 
-                    x: { grid: { display: false } } // Remove as linhas de grade
+        // DLI por Dia 
+        function estufa_01() { window.location.href = "dashboard.html"; }
+
+        // Esta é a única variável global que precisamos para o histórico das barras
+        let valoresGrafico = [0, 0, 0, 0, 0, 0, 0];
+        let graficoAtual = null;
+
+        // Função de captação de dados do banco
+        function DliSensor(idSensor) {
+            fetch(`/medidas/sensor/historico/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+                if (response.status == 200) {
+                    response.json().then(function (resposta) { // CERTIFIQUE-SE DE QUE ESTÁ "response.json()"
+                        console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
+
+                        var dados = resposta[0];
+                        document.getElementById(`dli-value-s1`).innerText = dados.dli;
+                        document.getElementById(`ppfd-value-s1`).innerText = dados.ppfd;
+
+                        valoresGrafico = [];
+                        for (let i = resposta.length - 1; i >= 0; i--) {
+                            valoresGrafico.push(resposta[i].ppfd);
+                        }
+
+                        plotarGrafico();
+                        setTimeout(() => DliSensor(idSensor), 5000);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
                 }
-            },
-            plugins: [{
-                id: 'linhaMeta',
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
 
-                // Executado após o desenho do gráfico, para sobrepor a linha de meta
-                afterDraw(grafico) {
-                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+        // Função de plotagem dos dados no gráfico
+        function plotarGrafico() {
+            // Se o gráfico já existir, injetamos a lista completa de 7 posições de uma vez só
+            if (graficoAtual) {
+                graficoAtual.data.datasets[0].data = valoresGrafico;
+                graficoAtual.update();
+                return;
+            }
 
-                    // Converte o valor 15 (meta de DLI) para a posição em pixels no eixo Y
-                    const posicaoMetaY = eixoY.getPixelForValue(15);
+            // Variável para criação do gráfico
+            const canvaGrafico = document.getElementById('chart_dli');
 
-                    // Configura o estilo da linha tracejada amarela
-                    contexto.strokeStyle = '#EDD011';
-                    // Desenha a linha horizontal da meta de ponta a ponta no gráfico
-                    contexto.moveTo(eixoX.left, posicaoMetaY);
-                    contexto.lineTo(eixoX.right, posicaoMetaY);
-                    contexto.stroke();
-
-                }
-            }]
-        });
-
-
-        //  Gráfico de Linha: Histórico de Luminosidade (Últimas 24 Horas) 
-        new Chart(document.getElementById('hist_lux_chart'), {
-            type: 'line',
-            data: {
-                // Horas do dia (00h–23h) exibidas no eixo X
-                labels: ['00h', '', '02h', '', '04h', '', '06h', '', '08h', '', '10h', '',
-                    '12h', '', '14h', '', '16h', '', '18h', '', '20h', '', '22h', ''],
-                datasets: [{
-                    label: 'PPFD',
-                    // Leituras de PPFD 
-                    data: [1.87, 4.75, 3.66, 2.99, 0.78, 0.78, 17.32, 79.13, 123.43, 181.66,
-                        252.43, 300.85, 390.02, 368.85, 300.64, 280.51, 163.27, 92.67,
-                        3.41, 0.33, 4.74, 4.83, 4.04, 1.52],
-                    borderColor: '#FA8016',                    // Cor da linha
-                    backgroundColor: 'rgba(250,128,22,0.08)',
-                    fill: true,       // Ativa o preenchimento entre a linha e o eixo X
-                    tension: 0.4,     // Suaviza a curva da linha 
-                    pointRadius: 0,   // Oculta os pontos individuais para visual mais limpo
-                    borderWidth: 2.5
-                }]
-            },
-            options: {
-                plugins: {
-                    legend: { display: false } // Oculta a legenda padrão do Chart.js
+            // Criação inicial do gráfico
+            graficoAtual = new Chart(canvaGrafico, {
+                type: 'bar',
+                data: {
+                    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+                    datasets: [{
+                        label: 'DLI Atual',
+                        data: valoresGrafico, // CONSERTO: Agora o Chart.js lê os 7 dados do loop diretamente
+                        backgroundColor: '#57AF32',
+                        borderRadius: 6
+                    }]
                 },
-                scales: {
-                    y: { min: 0, max: 700 },   // Faixa do eixo Y
-                    x: {
-                        grid: { display: false },   // Remove as linhas de grade verticais
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { max: 600 },
+                        x: { grid: { display: false } }
                     }
-                }
-            },
-            plugins: [{
-                id: 'zonaIdealPPFD',
+                },
+                plugins: [{
+                    id: 'linhaMeta',
+                    afterDraw(grafico) {
+                        const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+                        const posicaoMetaY = eixoY.getPixelForValue(250);
 
-                // Executado antes do desenho do gráfico, para que a faixa fique atrás da linha
-                beforeDraw(grafico) {
-                    const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+                        contexto.beginPath();
+                        contexto.strokeStyle = '#EDD011';
+                        contexto.moveTo(eixoX.left, posicaoMetaY);
+                        contexto.lineTo(eixoX.right, posicaoMetaY);
+                        contexto.stroke();
+                        contexto.closePath();
+                    }
+                }]
+            });
+        }
 
-                    // faixa ideal
-                    const topoZonaIdeal = eixoY.getPixelForValue(400);
-                    const baseZonaIdeal = eixoY.getPixelForValue(200);
-
-                    // Calcula o centro da faixa para posicionar o rótulo
-                    const centroHorizontal = (eixoX.left + eixoX.right) / 2;
-                    const centroVertical = (topoZonaIdeal + baseZonaIdeal) / 2;
-
-
-                    //  a zona ideal
-                    contexto.fillStyle = 'rgba(87,175,50,0.12)';
-                    contexto.fillRect(
-                        eixoX.left,                            // X inicial (borda esquerda do gráfico)
-                        topoZonaIdeal,                         // Y inicial (topo da faixa = 400 ppfd)
-                        eixoX.right - eixoX.left,              // Largura total do gráfico
-                        baseZonaIdeal - topoZonaIdeal          // Altura da faixa (entre 200 e 400 ppfd)
-                    );
-
-                    // Escreve o rótulo centralizado dentro da faixa verde
-                    contexto.fillStyle = '#57AF32';
-                    contexto.font = '11px Arial';
-                    contexto.textAlign = 'center';
-                    contexto.fillText('ZONA IDEAL (200-400 PPFD)', centroHorizontal, centroVertical + 4);
-
-                }
-            }]
-        });
+        // Inicialização
+        window.onload = function () {
+            console.log("Página carregada com sucesso!");
+            DliSensor(1);
+        };
 
         function Voltar() {
             window.location.href = "dashboard-geral.html";
