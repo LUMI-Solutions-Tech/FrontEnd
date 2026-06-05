@@ -72,7 +72,6 @@
             </div>
 
             <div class="coluna2">
-
                 <div class="card branco">
                     <div class="linha-entre">
                         <b>Histórico de Luminosidade — Últimas 24 horas - Estufa A</b>
@@ -114,25 +113,30 @@
         function estufa_01() { window.location.href = "dashboard.html"; }
 
         // Esta é a única variável global que precisamos para o histórico das barras
-        let valoresGrafico = [0, 0, 0, 0, 0, 0, 0];
+        let valoresGrafico1 = [0, 0, 0, 0, 0, 0, 0];
+        let valoresGrafico2 =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let graficoAtual = null;
+        let graficoAtual2 = null
 
         // Função de captação de dados do banco
         function DliSensor(idSensor) {
-            fetch(`/medidas/sensor/historico/${idSensor}`, { cache: 'no-store' }).then(function (response) {
+            fetch(`/dash/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
                 if (response.status == 200) {
-                    response.json().then(function (resposta) { // CERTIFIQUE-SE DE QUE ESTÁ "response.json()"
+                    response.json().then(function (resposta) {
                         console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
 
                         var dados = resposta[0];
                         document.getElementById(`dli-value-s1`).innerText = dados.dli;
                         document.getElementById(`ppfd-value-s1`).innerText = dados.ppfd;
 
-                        valoresGrafico = [];
-                        for (let i = resposta.length - 1; i >= 0; i--) {
-                            valoresGrafico.push(resposta[i].ppfd);
+                        valoresGrafico1 = [];
+                        for (let i = 6; i >= 0; i--) {
+                            valoresGrafico1.push(resposta[i].dli); // puxando dli e [6 - i] invertendo a ordem que o vetor plota no gráfico
                         }
-
+                        valoresGrafico2 = [];
+                        for (let i = resposta.length - 1; i >= 0; i--) {
+                            valoresGrafico2.push(resposta[i].ppfd); // puxando ppfd
+                        }
                         plotarGrafico();
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
@@ -147,24 +151,63 @@
 
         // Função de plotagem dos dados no gráfico
         function plotarGrafico() {
-            // Se o gráfico já existir, injetamos a lista completa de 7 posições de uma vez só
             if (graficoAtual) {
                 graficoAtual.data.datasets[0].data = valoresGrafico;
                 graficoAtual.update();
-                return;
             }
 
-            // Variável para criação do gráfico
-            const canvaGrafico = document.getElementById('chart_dli');
+             if (graficoAtual2) {
+                graficoAtual2.data.datasets[0].data = valoresGrafico2;
+                graficoAtual2.update();
+    
+            }
 
-            // Criação inicial do gráfico
+            const canvaGrafico = document.getElementById('chart_dli');
+            const grafico2 = document.getElementById('hist_lux_chart')
+
+             // Criação inicial do gráfico
             graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
                     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                     datasets: [{
                         label: 'DLI Atual',
-                        data: valoresGrafico, // CONSERTO: Agora o Chart.js lê os 7 dados do loop diretamente
+                        data: valoresGrafico1, // CONSERTO: Agora o Chart.js lê os 7 dados do loop diretamente
+                        backgroundColor: '#57AF32',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { max: 25 },
+                        x: { grid: { display: false } }
+                    }
+                },
+                plugins: [{
+                    id: 'linhaMeta',
+                    afterDraw(grafico) {
+                        const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
+                        const posicaoMetaY = eixoY.getPixelForValue(15);
+
+                        contexto.beginPath();
+                        contexto.strokeStyle = '#EDD011';
+                        contexto.moveTo(eixoX.left, posicaoMetaY);
+                        contexto.lineTo(eixoX.right, posicaoMetaY);
+                        contexto.stroke();
+                        contexto.closePath();
+                    }
+                }]
+            });
+            graficoAtual2 = new Chart(grafico2, {
+                type: 'line',
+                data: {
+                    labels: ['00', '02', '04', '06', '08', '10', '12', '14', '16', '18', '20', '22'],
+                    datasets: [{
+                        label: 'PPFD',
+                        data: valoresGrafico2, 
                         backgroundColor: '#57AF32',
                         borderRadius: 6
                     }]
@@ -193,6 +236,7 @@
                     }
                 }]
             });
+           
         }
 
         // Inicialização
