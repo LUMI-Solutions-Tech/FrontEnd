@@ -163,28 +163,25 @@
                     valorSensor[3]
                 ];
 
-                if (valorSensor[0] > 200 && valorSensor[0] < 400) {
+                if (valorSensor[0] < 200 || valorSensor[0] > 400) {
                     graficoAtual.data.datasets[0].backgroundColor[0] = "#FA8016";
                 } else {
                     graficoAtual.data.datasets[0].backgroundColor[0] = "#57AF32";
                 }
-
-                if (valorSensor[1] > 200 && valorSensor[0] < 400) {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#FA8016";
+                if (valorSensor[1] < 200 || valorSensor[1] > 400) {
+                    graficoAtual.data.datasets[0].backgroundColor[1] = "#FA8016";
                 } else {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#57AF32";
+                    graficoAtual.data.datasets[0].backgroundColor[1] = "#57AF32";
                 }
-
-                if (valorSensor[2] > 200 && valorSensor[0] < 400) {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#FA8016";
+                if (valorSensor[2] < 200 || valorSensor[2] > 400) {
+                    graficoAtual.data.datasets[0].backgroundColor[2] = "#FA8016";
                 } else {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#57AF32";
+                    graficoAtual.data.datasets[0].backgroundColor[2] = "#57AF32";
                 }
-
-                if (valorSensor[3] > 200 && valorSensor[0] < 400) {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#FA8016";
+                if (valorSensor[3] < 200 || valorSensor[3] > 400) {
+                    graficoAtual.data.datasets[0].backgroundColor[3] = "#FA8016";
                 } else {
-                    graficoAtual.data.datasets[0].backgroundColor[0] = "#57AF32";
+                    graficoAtual.data.datasets[0].backgroundColor[3] = "#57AF32";
                 }
 
                 graficoAtual.update();
