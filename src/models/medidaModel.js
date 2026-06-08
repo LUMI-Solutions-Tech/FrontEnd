@@ -5,7 +5,7 @@ function buscarDadosSensor(id) {
         SELECT 
             ppfd,
             dli
-        FROM leituras
+        FROM Leituras
         WHERE fkSensor = '${id}'
         ORDER BY dataHora DESC
         LIMIT 1;
