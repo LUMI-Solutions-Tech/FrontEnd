@@ -2,13 +2,11 @@ var database = require("../database/config");
 
 function buscarDadosEspSensor(id) {
     var instrucaoSql = `
-        SELECT 
-        ppfd,
-        dli
-        FROM Leituras
-        WHERE fkSensor = '${id}'
-        ORDER BY dataHora DESC
-        LIMIT 12;
+        SELECT ppfd, dli 
+    FROM vwDashboard 
+    WHERE fkSensor = ${id} 
+    ORDER BY dataHora DESC 
+    LIMIT 12;
     `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
