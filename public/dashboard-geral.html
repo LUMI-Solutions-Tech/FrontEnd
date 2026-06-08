@@ -24,7 +24,7 @@
             </div>
 
             <div class="menu_dash">
-                <a href="./suporte.html"  class="opcoes-menu cadastro">Suporte</a>
+                <a href="./suporte.html" class="opcoes-menu cadastro">Suporte</a>
                 <a href="./index.html" class="opcoes-menu login" class="opcoes-menu">Sair</a>
             </div>
         </div>
@@ -145,9 +145,9 @@
                     console.error('Nenhum dado encontrado ou erro na API');
                 }
             })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
         }
 
         function plotarGrafico(idSensor, dados) {
@@ -162,6 +162,12 @@
                     valorSensor[2],
                     valorSensor[3]
                 ];
+
+                if (valorSensor[0] < 250) { graficoAtual.data.datasets[0].backgroundColor[0] = "#FA8016"; } else { graficoAtual.data.datasets[0].backgroundColor[0] = "#57AF32"; }
+                if (valorSensor[1] < 250) { graficoAtual.data.datasets[0].backgroundColor[1] = "#FA8016"; } else { graficoAtual.data.datasets[0].backgroundColor[1] = "#57AF32"; }
+                if (valorSensor[2] < 250) { graficoAtual.data.datasets[0].backgroundColor[2] = "#FA8016"; } else { graficoAtual.data.datasets[0].backgroundColor[2] = "#57AF32"; }
+                if (valorSensor[3] < 250) { graficoAtual.data.datasets[0].backgroundColor[3] = "#FA8016"; } else { graficoAtual.data.datasets[0].backgroundColor[3] = "#57AF32"; }
+
                 graficoAtual.update();
                 return;
             }
