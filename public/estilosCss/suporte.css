@@ -76,6 +76,15 @@ text-align: center;
 margin-top: 11%;
 }
 
+.botao-parte2-suporte:hover {
+
+    color: #ffffff;
+    transform: scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 146, 54, 0.3);
+
+
+}
+
 .termino_suporte{
 display: flex;
 flex-direction: column;
