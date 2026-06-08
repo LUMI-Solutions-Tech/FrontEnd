@@ -137,7 +137,7 @@
                         for (let i = resposta.length - 1; i >= 0; i--) {
                             valoresGrafico2.push(resposta[i].ppfd); // puxando ppfd
                         }
-                        plotarGrafico();
+                        plotarGrafico(idSensor, dados);
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
                 } else {
@@ -149,30 +149,30 @@
                 });
         }
 
-        // Função de plotagem dos dados no gráfico
         function plotarGrafico() {
-            if (graficoAtual) {
-                graficoAtual.data.datasets[0].data = valoresGrafico;
+            
+            // Se os gráficos já existem, apenas atualiza e SAI da função
+            if (graficoAtual && graficoAtual2) {
+                graficoAtual.data.datasets[0].data = valoresGrafico1; // CORREÇÃO: Adicionado o "1" no nome da variável
                 graficoAtual.update();
-            }
-
-             if (graficoAtual2) {
+                
                 graficoAtual2.data.datasets[0].data = valoresGrafico2;
                 graficoAtual2.update();
-    
+                
+                return; // CORREÇÃO: Retorno essencial para não recriar os gráficos
             }
 
             const canvaGrafico = document.getElementById('chart_dli');
-            const grafico2 = document.getElementById('hist_lux_chart')
+            const grafico2 = document.getElementById('hist_lux_chart');
 
-             // Criação inicial do gráfico
+            // Criação inicial do gráfico (Só vai rodar na primeira vez)
             graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
                     labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
                     datasets: [{
                         label: 'DLI Atual',
-                        data: valoresGrafico1, // CONSERTO: Agora o Chart.js lê os 7 dados do loop diretamente
+                        data: valoresGrafico1, 
                         backgroundColor: '#57AF32',
                         borderRadius: 6
                     }]
@@ -201,6 +201,7 @@
                     }
                 }]
             });
+
             graficoAtual2 = new Chart(grafico2, {
                 type: 'line',
                 data: {
@@ -236,9 +237,7 @@
                     }
                 }]
             });
-           
         }
-
         // Inicialização
         window.onload = function () {
             console.log("Página carregada com sucesso!");
