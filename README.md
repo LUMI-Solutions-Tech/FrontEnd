@@ -1,4 +1,4 @@
-# 🌱 Lumi
+# Lumi
 
 **Lumi** é um projeto acadêmico focado em **agricultura orgânica inteligente**, com ênfase no **monitoramento da luminosidade em estufas de cultivo de alface**.
 
@@ -6,7 +6,7 @@ Este repositório contém o **Front-end / interface web** do projeto, desenvolvi
 
 ---
 
-## 📌 Sobre o Projeto
+## Sobre o Projeto
 
 O **Lumi** foi idealizado para auxiliar produtores no acompanhamento das condições de luminosidade dentro de estufas agrícolas, especialmente no cultivo de **alface**, uma planta altamente sensível à exposição luminosa.
 
@@ -14,21 +14,21 @@ A proposta do sistema é fornecer **dados em tempo real** sobre a intensidade da
 
 ---
 
-## 🎯 Objetivo
+##  Objetivo
 
 O principal objetivo do Lumi é oferecer uma solução tecnológica para o **monitoramento da luminosidade em estufas**, ajudando a identificar condições inadequadas que possam comprometer o desenvolvimento da plantação.
 
 Com isso, o projeto busca contribuir para:
 
-- 🌿 Melhor desenvolvimento da alface
-- 📈 Aumento da produtividade
-- 🥬 Melhoria da qualidade do cultivo
-- 💡 Uso inteligente da tecnologia no campo
-- ♻️ Produção mais eficiente e sustentável
+-  Melhor desenvolvimento da alface
+-  Aumento da produtividade
+-  Melhoria da qualidade do cultivo
+-  Uso inteligente da tecnologia no campo
+-  Produção mais eficiente e sustentável
 
 ---
 
-## ⚠️ Problema que o Projeto Resolve
+## Problema que o Projeto Resolve
 
 Em muitos cultivos protegidos, o controle da luminosidade não é acompanhado com precisão, o que pode causar diversos impactos negativos no plantio.
 
@@ -42,7 +42,7 @@ Entre os principais problemas, destacam-se:
 
 ---
 
-## 💡 Solução Proposta
+## Solução Proposta
 
 O Lumi propõe um sistema de **monitoramento de luminosidade em tempo real**, utilizando um **sensor LDR (Light Dependent Resistor)** conectado a um **Arduino UNO R3**.
 
@@ -55,7 +55,7 @@ O Lumi propõe um sistema de **monitoramento de luminosidade em tempo real**, ut
 
 ---
 
-## 🧠 Escopo do Projeto
+## Escopo do Projeto
 
 > **Importante:** o Lumi **não é um sistema automatizado**.
 
@@ -72,7 +72,7 @@ A decisão final continua sendo **humana**, baseada nas informações monitorada
 
 ---
 
-## 💻 Sobre este Repositório
+## Sobre este Repositório
 
 Este repositório contém o desenvolvimento da **interface Front-end** do Lumi, responsável por apresentar visualmente o projeto e, futuramente, possibilitar a exibição de dados monitorados.
 
@@ -85,7 +85,7 @@ A proposta visual foi pensada para unir:
 
 ---
 
-## 🎨 Interface / Proposta Visual
+## Interface / Proposta Visual
 
 A interface do Lumi está sendo desenvolvida com uma estética **moderna, tecnológica e intuitiva**, incluindo seções como:
 
@@ -98,7 +98,7 @@ A interface do Lumi está sendo desenvolvida com uma estética **moderna, tecnol
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Front-end
 - **HTML5**
