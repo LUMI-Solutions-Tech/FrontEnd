@@ -46,31 +46,30 @@
         </div>
 
         <div class="grid-4">
-            <button style="border: none;" onclick="estufa_01()">
-                <div class="card laranja">
+            <button style="border: none; background: transparent;" onclick="estufa_01()">
+                <div class="card laranja" id="card-s1">
                     <small>Estufa A</small><b id="dli-value-s1">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
-            <button style="border: none;" onclick="estufa_02()">
-                <div class="card verde">
+            <button style="border: none; background: transparent;" onclick="estufa_02()">
+                <div class="card verde" id="card-s2">
                     <small>Estufa B</small><b id="dli-value-s2">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
-            <button style="border: none;" onclick="estufa_03()">
-                <div class="card verde">
+            <button style="border: none; background: transparent;" onclick="estufa_03()">
+                <div class="card verde" id="card-s3">
                     <small>Estufa C</small><b id="dli-value-s3">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
-            <button style="border: none;" onclick="estufa_04()">
-                <div class="card verde">
+            <button style="border: none; background: transparent;" onclick="estufa_04()">
+                <div class="card verde" id="card-s4">
                     <small>Estufa D</small><b id="dli-value-s4">0 <span>mol/m²/d</span></b><small>Ideal:
                         15-20 mol/m²/d</small>
                 </div>
             </button>
-
 
             <div class="card branco">
                 <div class="linha-entre">
@@ -79,7 +78,7 @@
                 </div>
                 <canvas id="chart_dli"></canvas>
             </div>
-<!-- falta fazer routes, model, controler main.js -->
+            <!-- falta fazer routes, model, controler main.js -->
             <div class="card branco">
                 <b>Resumo da Semana</b>
                 <div class="resumo-linha">
@@ -104,20 +103,17 @@
             </div>
         </div>
 
-
     </main>
 
     <script>
-        // DLI por Dia 
-        function estufa_01() { window.location.href = "dashboard.html"; } // ao clicar no botão do sensor redireciona para a aba de dash detalhada do sensor
+        function estufa_01() { window.location.href = "dashboard.html"; }
         function estufa_02() { window.location.href = "dashboard.html"; }
         function estufa_03() { window.location.href = "dashboard.html"; }
         function estufa_04() { window.location.href = "dashboard.html"; }
 
-        let valorSensor = [0, 0, 0, 0]; // cria um vetor com valores em 0 que posteriormente será utilizado na plotagem do gráfico
-        let graficoAtual = null; // declara que o gráfico atual é null 
+        let valorSensor = [0, 0, 0, 0];
+        let graficoAtual = null;
 
-        // função de captação de dados do banco
         function DliSensor(idSensor) {
             fetch(`/medidas/sensor/${idSensor}`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
@@ -125,32 +121,39 @@
                         console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
                         var dados = resposta[0];
 
-                        // Atualiza os indicadores na tela
+                        // Atualiza o valor na tela
                         document.getElementById(`dli-value-s${idSensor}`).innerText = dados.dli;
 
-                        // Atualiza o gráfico com o novo dado
+                        const dli = parseFloat(dados.dli);
+                        const card = document.getElementById(`card-s${idSensor}`);
+                        if (dli < 15 || dli > 20) {
+                            card.style.backgroundColor = "#FA8016";
+                            card.style.color = "white";
+                        } else {
+                            card.style.backgroundColor = "#57AF32";
+                            card.style.color = "white";
+                        }
+
+                        // Atualiza o gráfico
                         plotarGrafico(idSensor, dados);
 
-                        // intervalo de 5 segundos para a proxima requisição no banco 
+                        // Repete a cada 5 segundos
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
                 }
             })
-                .catch(function (error) {
-                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-                });
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
         }
 
-        // função de plotagem dos dados no gráfico
         function plotarGrafico(idSensor, dados) {
             console.log("Iniciando a plotagem do gráfico com os dados:", dados);
 
-            // pega a lista declarada na linha #117 e guarda o dado recebido na posição correta do array global
             valorSensor[idSensor - 1] = dados.ppfd;
 
-            // if que se o grafico atual existir ele atualiza o grafico com os novos valores
             if (graficoAtual) {
                 graficoAtual.data.datasets[0].data = [
                     valorSensor[0],
@@ -162,21 +165,19 @@
                 return;
             }
 
-            // variavel para criação do grafico
             const canvaGrafico = document.getElementById('chart_dli');
 
-            // plotagem do gráfico, utilizando a variavel de criação do grafico
             graficoAtual = new Chart(canvaGrafico, {
                 type: 'bar',
                 data: {
-                    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'], // declara os produtos do grafico no eixo x
+                    labels: ['Sensor 1', 'Sensor 2', 'Sensor 3', 'Sensor 4'],
                     datasets: [{
                         label: 'DLI Atual',
                         data: [
                             valorSensor[0],
                             valorSensor[1],
                             valorSensor[2],
-                            valorSensor[3] // utiliza a variavel já com valores separados anteriormente para plotar em cada um dos produtos do gráfico em ordem
+                            valorSensor[3]
                         ],
                         backgroundColor: ['#57AF32', '#57AF32', '#57AF32', '#57AF32'],
                         borderRadius: 6
@@ -187,7 +188,7 @@
                         legend: { display: false }
                     },
                     scales: {
-                        y: { max: 600 }, // o gráfico no eixo y vai até 600
+                        y: { max: 600 },
                         x: { grid: { display: false } }
                     }
                 },
@@ -195,7 +196,7 @@
                     id: 'linhaMeta',
                     afterDraw(grafico) {
                         const { ctx: contexto, scales: { y: eixoY, x: eixoX } } = grafico;
-                        const posicaoMetaY = eixoY.getPixelForValue(250); // parte que mostra a uma linha de ideal no 250
+                        const posicaoMetaY = eixoY.getPixelForValue(250);
 
                         contexto.beginPath();
                         contexto.strokeStyle = '#EDD011';
@@ -208,8 +209,7 @@
             });
         }
 
-        // função que após o carregamento da pagina puxa a função de DliSensor puxando o id de cada Sensor
-            window.onload = function () {
+        window.onload = function () {
             console.log("Página carregada com sucesso!");
             DliSensor(1);
             DliSensor(2);
