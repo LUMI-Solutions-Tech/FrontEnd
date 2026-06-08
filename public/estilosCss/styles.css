@@ -147,28 +147,27 @@ body {
 
 .botao-parte2 {
     display: block;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: .9rem;
+    font-weight: 100;
     font-family: Arial, sans-serif;
     background-color: #156915;
     color: white;
     border: none;
-    border-radius: 8px;
-    padding: 23px 240px;
+    border-radius: 40px;
     margin: auto;
     margin-top: 52px;
     margin-bottom: 100px;
-    width: 10%;
+    width: 8%;
     text-decoration: none;
     text-align: center;
 }
 
-.botao-parte2:hover {
+.botao-parte2-suporte:hover {
 
-    color: #000;
-    background-color: #00b341;
+    color: #ffffff;
     transform: scale(1.03);
     box-shadow: 0 8px 15px rgba(0, 146, 54, 0.3);
+
 
 }
 
