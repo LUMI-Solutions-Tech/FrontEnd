@@ -122,7 +122,7 @@
                         console.log(`Dados recebidos do Sensor ${idSensor}: ${JSON.stringify(resposta)}`);
                         var dados = resposta[0];
 
-                        // Atualiza o valor na tela
+                        // puxa o dado de dli
                         document.getElementById(`dli-value-s${idSensor}`).innerText = dados.dli;
 
                         const dli = parseFloat(dados.dli);
@@ -135,10 +135,10 @@
                             card.style.color = "white";
                         }
 
-                        // Atualiza o gráfico
+                        // prepara a função plotar gráfico
                         plotarGrafico(idSensor, dados);
 
-                        // Repete a cada 5 segundos
+                        // repete de 5 em 5 segundos
                         setTimeout(() => DliSensor(idSensor), 5000);
                     });
                 } else {
@@ -153,6 +153,7 @@
         function plotarGrafico(idSensor, dados) {
             console.log("Iniciando a plotagem do gráfico com os dados:", dados);
 
+            // salva o valor de ppfd atual na posição certa do array
             valorSensor[idSensor - 1] = dados.ppfd;
 
             if (graficoAtual) {
